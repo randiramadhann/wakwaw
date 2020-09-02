@@ -1,0 +1,21 @@
+.logo {
+  height: 32px;
+  /* background: rgba(255, 255, 255, 0.2); */
+  margin: 16px;
+}
+
+.sitelayoutsubheaderbackground {
+  background: #fff;
+}
+
+.sitelayoutbackground {
+  background: #fff;
+}
+
+.sitelayoutsidebar {
+  background: #001c72;
+  color: rgba(255, 255, 255, 0.65);
+}
+.sitelayoutsub {
+  background: #001c72;
+}
