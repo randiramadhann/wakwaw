@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "2a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "3a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Ditolak"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "4a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Berhenti"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "5a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "6a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Ditolak"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "7a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "8a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "9a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Ditolak"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "10a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "11a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "12a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Ditolak"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  },
+  {
+    "id": "13a6b54",
+    "nama_nasabah": "Nur Ahmad",
+    "no_rek": 1123456678,
+    "status": ["Selesai"],
+    "target": 0,
+    "setoran": 0,
+    "terkumpul": 0
+  }
+]

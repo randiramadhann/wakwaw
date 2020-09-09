@@ -31,14 +31,12 @@ function sidebar({ router }) {
       }}
       className={styles.sitelayoutsidebar}
     >
-      <div className={styles.logo}>
-        <img src="/img/logo-zenia.png" width="100px"></img>{" "}
-      </div>
       <Menu
         style={{
           background: "#001c72",
           color: "rgba(255, 255, 255, 0.65)",
           width: "201px",
+          marginTop: "20px",
         }}
         mode="inline"
         selectedKeys={[router.pathname]}
@@ -83,11 +81,6 @@ function sidebar({ router }) {
           </Menu.Item>
         </SubMenu>
         <SubMenu key="sub3" icon={<HomeOutlined />} title="KPR">
-          <Menu.Item key="/kpr/wawancara">
-            <Link href="/kpr/wawancara">
-              <a>Wawancara</a>
-            </Link>
-          </Menu.Item>
           <Menu.Item key="/kpr/pengajuan">
             <Link href="/kpr/pengajuan">
               <a>Pengajuan</a>

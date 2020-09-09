@@ -1,6 +1,6 @@
 @import "~antd/dist/antd.less";
 
-@primary-color: #fff; // primary color for all components
+@primary-color: #1c18ff; // primary color for all components
 @link-color: #1890ff; // link color
 @success-color: #52c41a; // success state color
 @warning-color: #faad14; // warning state color
@@ -33,8 +33,40 @@
 }
 .ant-menu-item a {
   color: rgba(255, 255, 255, 0.65);
+  // &:hover {
+  //   color: #fff;
+  // }
 }
-.ant-menu-item-selected a,
-.ant-menu-item-selected a:hover {
+// .ant-menu :hover {
+//   color: #fff;
+// }
+// i .ant-menu-submenu-arrow :hover {
+//   color: #fff;
+// }
+.ant-menu-submenu-selected {
   color: #fff;
+}
+.ant-menu-item-selected {
+  color: #fff;
+}
+.ant-menu-item-selected a {
+  color: #fff;
+}
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: 3px solid #fff;
+}
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  border: none;
+}
+.ant-pagination-item {
+  border: none;
+}
+.ant-pagination-item-active {
+  border-radius: 100%;
+  border-color: rgba(46, 161, 255, 0.1) !important;
+  background: rgba(46, 161, 255, 0.1);
 }
