@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-
+import Notifikasi from '../../components/sidebar/tabungan/aktif';
 import styles from "../../styles/Layout.module.css";
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
@@ -18,7 +18,7 @@ function tabAktif() {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
-            tabAktif page
+            <Notifikasi/>
           </div>
         </Content>
       </Layout>

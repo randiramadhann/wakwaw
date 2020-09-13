@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-
+import Dashboard from "./dashboard";
 import Login from "../pages/login";
 
 export default function Home() {
@@ -11,9 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="maincontent">
-        <h1>Hi there!</h1>
-      </main>
+      <Dashboard/>
+
+      
     </div>
   );
 }
