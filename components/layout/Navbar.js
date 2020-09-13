@@ -12,7 +12,7 @@ function navbar() {
       style={{ padding: 0 }}
     >
       <div className={styles.logo}>
-        <img src="/img/logo-zenia.png" width="100px"></img>
+        <img src="/img/logo-zenia.png" width="100px" />
       </div>
     </Header>
   );

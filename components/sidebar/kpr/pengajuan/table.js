@@ -1,4 +1,6 @@
 import React from "react";
+import fetch from "isomorphic-fetch";
+import Link from "next/link";
 import { Table, Tag, Button, Space } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -42,25 +44,38 @@ const columns = [
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        {" "}
-        <a>Detail</a>{" "}
-        <Button
-          type="primary"
-          shape="circle"
-          size="small"
-          icon={<EditOutlined />}
-          style={{
-            background: "#EFEFEF",
-            borderColor: "#EFEFEF",
-            color: "#333",
-          }}
-        />
+        <Link href={`/kpr/${record.id}/detail`}>
+          <a>Detail</a>
+        </Link>
+        <Link href={`/kpr/${record.id}/edit`}>
+          <Button
+            type="primary"
+            shape="circle"
+            size="small"
+            icon={<EditOutlined />}
+            style={{
+              background: "#EFEFEF",
+              borderColor: "#EFEFEF",
+              color: "#333",
+            }}
+          />
+        </Link>
       </Space>
     ),
   },
 ];
 
-class table extends React.Component {
+const HOST_NAME = process.env.HOST_NAME || "http://localhost:3000/";
+
+export default class table extends React.Component {
+  static async getInitialProps() {
+    const data = await fetch(`${HOST_NAME}api/pengajuan`);
+    const items = await data.json();
+    return {
+      items,
+    };
+  }
+
   state = {
     selectedRowKeys: [], // Check here to configure the default column
   };
@@ -75,6 +90,8 @@ class table extends React.Component {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
+    const { items } = this.props;
+    console.log("items", items);
     return (
       <div>
         <Table
@@ -84,12 +101,10 @@ class table extends React.Component {
           }}
           rowSelection={rowSelection}
           columns={columns}
-          dataSource={users}
+          dataSource={items}
           rowKey={(row) => row.id}
         />
       </div>
     );
   }
 }
-
-export default table;
