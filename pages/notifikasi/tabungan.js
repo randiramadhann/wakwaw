@@ -10,9 +10,9 @@ const { Content } = Layout;
 function notifTabungan() {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sidebar />
+      <Navbar />
       <Layout>
-        <Navbar />
+        <Sidebar />
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className={styles.sitelayoutbackground}
