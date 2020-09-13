@@ -1,18 +1,10 @@
 import React from "react";
-import { Layout, Table, Tag, Button, Space } from "antd";
-import Link from "next/link";
-import { EditOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
+import Link from "next/link";
+import { Table, Tag, Button, Space } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
-import styles from "../../styles/Layout.module.css";
-
-import Sidebar from "../../components/layout/Sidebar";
-import Navbar from "../../components/layout/Navbar";
-
-import Create from "../../components/sidebar/kpr/pengajuan/add";
-import Search from "../../components/sidebar/kpr/pengajuan/search";
-
-const { Content } = Layout;
+import users from "../../../../pages/api/pengajuan.json";
 
 const columns = [
   {
@@ -73,9 +65,11 @@ const columns = [
   },
 ];
 
-export default class kprPengajuan extends React.Component {
+const HOST_NAME = process.env.HOST_NAME || "http://localhost:3000/";
+
+export default class table extends React.Component {
   static async getInitialProps() {
-    const data = await fetch(`https://my-json-server.typicode.com/noerswork/newapi/users`);
+    const data = await fetch(`${HOST_NAME}api/pengajuan`);
     const items = await data.json();
     return {
       items,
@@ -97,52 +91,20 @@ export default class kprPengajuan extends React.Component {
       onChange: this.onSelectChange,
     };
     const { items } = this.props;
-
+    console.log("items", items);
     return (
-      <Layout style={{ height: "100vh" }}>
-        <Navbar />
-        <Layout>
-          <Sidebar />
-          <Content style={{ margin: "24px 16px 0" }}>
-            <div
-              style={{
-                marginBottom: "24px",
-                fontSize: "16px",
-                fontWeight: "bold",
-              }}
-            >
-              KPR PENGAJUAN
-            </div>
-            <div
-              className={styles.sitelayoutbackground}
-              style={{ padding: 24, minHeight: 360 }}
-            >
-              <div
-                style={{
-                  marginBottom: "16px",
-                  position: "relative",
-                  float: "right",
-                  zIndex: "10",
-                }}
-              >
-                <Create />
-                <Search />
-              </div>
-
-              <Table
-                pagination={{
-                  pageSize: 5,
-                  position: ["bottomCenter"],
-                }}
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={items}
-                rowKey={(row) => row.id}
-              />
-            </div>
-          </Content>
-        </Layout>
-      </Layout>
+      <div>
+        <Table
+          pagination={{
+            pageSize: 5,
+            position: ["bottomCenter"],
+          }}
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={items}
+          rowKey={(row) => row.id}
+        />
+      </div>
     );
   }
 }
