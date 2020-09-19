@@ -17,8 +17,37 @@
 .sitelayoutsub {
   background: #001c72;
 }
+.anttimelineitemcontentorg {
+  background: #ffe9bdd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #f5b22d;
+}
 
-.antd-spin-container ul.ant-table-pagination-right li.ant-pagination-total-text {
+.anttimelineitemcontentblue {
+  background: #bddcffd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #4399fad8;
+}
+
+.antd-spin-container
+  ul.ant-table-pagination-right
+  li.ant-pagination-total-text {
   margin-top: -1630px;
   margin-left: -900px;
   z-index: 1000;
