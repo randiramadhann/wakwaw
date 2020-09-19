@@ -44,3 +44,11 @@
   text-align: left;
   border-left: 8px solid #4399fad8;
 }
+
+.antd-spin-container
+  ul.ant-table-pagination-right
+  li.ant-pagination-total-text {
+  margin-top: -1630px;
+  margin-left: -900px;
+  z-index: 1000;
+}

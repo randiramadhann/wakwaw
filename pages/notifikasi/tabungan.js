@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-
+import Notifikasi from '../../components/sidebar/notifikasi/tabungan';
 import styles from "../../styles/Layout.module.css";
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
@@ -18,7 +18,7 @@ function notifTabungan() {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
-            notifTabungan page
+            <Notifikasi/>
           </div>
         </Content>
       </Layout>
