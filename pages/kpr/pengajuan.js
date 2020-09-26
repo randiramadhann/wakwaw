@@ -9,15 +9,13 @@ import styles from "../../styles/Layout.module.css";
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
-import Create from "../../components/sidebar/kpr/pengajuan/add";
-import Search from "../../components/sidebar/kpr/pengajuan/search";
-
 const { Content } = Layout;
 
 const columns = [
   {
     title: "Nama Nasabah",
-    dataIndex: ["form", "name"],
+    dataIndex: "nama_nasabah",
+    // dataIndex: ["form", "name"],
     // render: (record) => record.form.name,
   },
   {
@@ -75,9 +73,20 @@ const columns = [
 ];
 
 export default class kprPengajuan extends React.Component {
+  //karena masih dibenerin apinya jadi pake dummy dulu
   //fetch data api yang swagger
+  // static async getInitialProps() {
+  //   const data = await fetch(`http://157.245.62.77:8080/kpr`);
+  //   const items = await data.json();
+  //   return {
+  //     items,
+  //   };
+  // }
+
   static async getInitialProps() {
-    const data = await fetch(`http://157.245.62.77:8080/kpr`);
+    const data = await fetch(
+      `https://my-json-server.typicode.com/noerswork/newapi/users`
+    );
     const items = await data.json();
     return {
       items,
@@ -134,14 +143,25 @@ export default class kprPengajuan extends React.Component {
                   zIndex: "10",
                 }}
               >
-                //komponen input searchnya berdasar nama nasabah jadi habis
-                form.name sesuai apinya
-                <Input.Search
+                {/* <Input.Search
                   allowClear
                   onSearch={(nameSearch) =>
                     this.setState({
                       items: this.props.items.filter((person) =>
                         person.form.name
+                          .toString()
+                          .toLowerCase()
+                          .includes(nameSearch.toLowerCase())
+                      ),
+                    })
+                  }
+                /> */}
+                <Input.Search
+                  allowClear
+                  onSearch={(nameSearch) =>
+                    this.setState({
+                      items: this.props.items.filter((person) =>
+                        person.nama_nasabah
                           .toString()
                           .toLowerCase()
                           .includes(nameSearch.toLowerCase())
