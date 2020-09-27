@@ -3,7 +3,7 @@
 @primary-color: #1c18ff; // primary color for all components
 @link-color: #1890ff; // link color
 @success-color: #52c41a; // success state color
-@warning-color: #faad14; // warning state color
+@warning-color: #ffe4af; // warning state color
 @error-color: #f5222d; // error state color
 @font-size-base: 14px; // major text font size
 @heading-color: rgba(0, 0, 0, 0.85); // heading text color
@@ -46,8 +46,90 @@
 .ant-menu-submenu-selected {
   color: #fff;
 }
+.ant-menu-item-selected {
+  color: #fff;
+}
+.ant-menu-item-selected a {
+  color: #fff;
+}
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: 3px solid #fff;
+}
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  border: none;
+}
+.ant-pagination-item {
+  border: none;
+}
+.ant-pagination-item-active {
+  border-radius: 100%;
+  border-color: rgba(46, 161, 255, 0.1) !important;
+  background: rgba(46, 161, 255, 0.1);
+}
+.ant-tabs-tab {
+  margin-right: 65px;
+}
+.ant-picker {
+  display: none;
+}
+.ant-picker-panel-container {
+  margin-left: 280px;
+  margin-top: 80px;
+}
+.ant-picker-header {
+  background: #59acfa;
+  color: #fafafa;
+}
+.ant-picker-header > button {
+  color: #fafafa;
+}
+
+// .ant-picker-cell-inner .ant-picker-cell-selected {
+//   background: #59acfa;
+// }
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border: 1px solid #59acfa;
+  border-radius: 50%;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #59acfa;
+  border-radius: 50%;
+}
 
 .antd-spin-container ul.ant-pagination li.ant-pagination-total-text {
   position: relative;
   right: 500;
+}
+
+// .ant-picker-dropdown {
+//   z-index: 4;
+//   position: relative;
+// }
+.ant-picker-calendar-header {
+  background: #59acfa;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  z-index: 1;
+  color: #59acfa;
+  background: #fff;
+  border-color: #59acfa;
+}
+
+// .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+//   background-color: #59acfa;
+// }
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):first-child {
+  border-color: #59acfa;
+}
+.ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
+  border-right-color: #59acfa;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+  background-color: #59acfa;
 }

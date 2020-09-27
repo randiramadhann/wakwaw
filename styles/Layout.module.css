@@ -17,65 +17,44 @@
 .sitelayoutsub {
   background: #001c72;
 }
+.anttimelineitemcontentorg {
+  background: #ffe9bdd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #f5b22d;
+}
 
-.antd-spin-container ul.ant-table-pagination-right li.ant-pagination-total-text {
+.anttimelineitemcontentblue {
+  background: #bddcffd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #4399fad8;
+}
+
+.antd-spin-container
+  ul.ant-table-pagination-right
+  li.ant-pagination-total-text {
   margin-top: -1630px;
   margin-left: -900px;
   z-index: 1000;
 }
 
-.card {
-  position: relative;
-  width: 259px;
-  height: 160px;
-  background: #7ECFA2;
-}
-
-.card1 {
-  position: absolute;
-  top: 50;
-  left: 300;
-  width: 259px;
-  height: 48px;
-  background: #6FC997;
-}
-
-.columnCard {
-margin-left: 20px;
-}
-
-.textCard{
-position: absolute;
-left: 20;
-top: 10;
-font-family: Open Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 12px;
-line-height: 16px;
-color: #FFFFFF;
-}
-
-.textCard1{
-  text-align: left;
-   font-family: Open Sans;
- font-style: normal;
- font-weight: bold;
- font-size: 12px;
- line-height: 16px;
- }
-
-.textPengaturan {
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
-  color: #333333;
-}
-
-.formPengaturan {
-  width: 280px;
-  height: 40px;
+.sitecalendardemocard {
+  width: 300px;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
 }
