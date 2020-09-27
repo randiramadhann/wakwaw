@@ -4,10 +4,12 @@ import { Layout } from "antd";
 import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
+import Form from "../components/sidebar/pengaturan/pengaturan.js"
 
 const { Content } = Layout;
 
 function pengaturan() {
+  
   return (
     <Layout style={{ height: "100vh" }}>
       <Navbar />
@@ -16,9 +18,10 @@ function pengaturan() {
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className={styles.sitelayoutbackground}
-            style={{ padding: 24, minHeight: 360 }}
+            style={{ position: "absolute", left: 615, padding: 24, minHeight: 471, width: 352 }}
           >
-            pengaturan page
+            <h1 className={styles.textPengaturan} style={{ textAlign: 'center', marginTop: 40 }}> Ubah password</h1>
+            <Form/>
           </div>
         </Content>
       </Layout>
