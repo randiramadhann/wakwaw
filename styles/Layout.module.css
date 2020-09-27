@@ -23,3 +23,59 @@
   margin-left: -900px;
   z-index: 1000;
 }
+
+.card {
+  position: relative;
+  width: 259px;
+  height: 160px;
+  background: #7ECFA2;
+}
+
+.card1 {
+  position: absolute;
+  top: 50;
+  left: 300;
+  width: 259px;
+  height: 48px;
+  background: #6FC997;
+}
+
+.columnCard {
+margin-left: 20px;
+}
+
+.textCard{
+position: absolute;
+left: 20;
+top: 10;
+font-family: Open Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 16px;
+color: #FFFFFF;
+}
+
+.textCard1{
+  text-align: left;
+   font-family: Open Sans;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 12px;
+ line-height: 16px;
+ }
+
+.textPengaturan {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #333333;
+}
+
+.formPengaturan {
+  width: 280px;
+  height: 40px;
+}

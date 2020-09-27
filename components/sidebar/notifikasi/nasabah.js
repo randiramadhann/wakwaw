@@ -5,7 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 class LoadMoreList extends React.Component {
   render() {
     const listData = [];
-    for (let i = 1; i < 23; i++) {
+    for (let i = 1; i < 50; i++) {
       listData.push({
         href: 'https://ant.design',
         title: `ini notif Nasabah ${i}`,
