@@ -5,7 +5,8 @@ import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
 import Schedule from "../components/sidebar/dashboard/schedule";
-
+import Card from "../components/sidebar/home/Card";
+import CardKPR from "../components/sidebar/home/CardKPR";
 const { Content } = Layout;
 
 function dashboard() {

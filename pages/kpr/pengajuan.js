@@ -1,8 +1,9 @@
-import React from "react";
-import { Layout, Table, Tag, Button, Space, Input } from "antd";
+import React, { useState } from "react";
+import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
+import Router from "next/router";
 
 import styles from "../../styles/Layout.module.css";
 
@@ -14,17 +15,16 @@ const { Content } = Layout;
 const columns = [
   {
     title: "Nama Nasabah",
-    dataIndex: "nama_nasabah",
-    // dataIndex: ["form", "name"],
+    dataIndex: ["data_nasabah", "nama_nasabah"],
     // render: (record) => record.form.name,
   },
   {
     title: "Nomor Rekening",
-    dataIndex: "no_rek",
+    dataIndex: ["data_nasabah", "no_rek"],
   },
   {
     title: "Status",
-    dataIndex: "status",
+    dataIndex: ["data_kpr", "status_kpr"],
     render: (value) => (
       <Tag style={{ borderRadius: "20px" }} color="#F2994A">
         {value}
@@ -33,17 +33,17 @@ const columns = [
   },
   {
     title: "Target",
-    dataIndex: "target",
+    dataIndex: ["data_kpr", "target"],
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
-    dataIndex: "setoran",
+    dataIndex: ["data_kpr", "setoran"],
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
-    dataIndex: "terkumpul",
+    dataIndex: ["data_kpr", "terkumpul"],
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
@@ -51,10 +51,10 @@ const columns = [
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <Link href={`/kpr/${record.id}/detail`}>
+        <Link href={`/kpr/${record._id}/detail`}>
           <a>Detail</a>
         </Link>
-        <Link href={`/kpr/${record.id}/edit`}>
+        <Link href={`/kpr/${record._id}/edit`}>
           <Button
             type="primary"
             shape="circle"
@@ -72,119 +72,95 @@ const columns = [
   },
 ];
 
-export default class kprPengajuan extends React.Component {
-  //karena masih dibenerin apinya jadi pake dummy dulu
-  //fetch data api yang swagger
-  // static async getInitialProps() {
-  //   const data = await fetch(`http://157.245.62.77:8080/kpr`);
-  //   const items = await data.json();
-  //   return {
-  //     items,
-  //   };
-  // }
+function pengajuan({ items }) {
+  const [dataSource, setDataSource] = useState(items);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [value, setValue] = useState("");
 
-  static async getInitialProps() {
-    const data = await fetch(
-      `https://my-json-server.typicode.com/noerswork/newapi/users`
-    );
-    const items = await data.json();
-    return {
-      items,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({ items: this.props.items });
-  }
-
-  state = {
-    selectedRowKeys: [], // Check here to configure the default column
-    nameSearch: "",
+  // rowSelection object indicates the need for row selection
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedRowKeys(selectedRowKeys);
+      console.log(`selectedRowKeys: ${selectedRowKeys}`);
+    },
   };
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
-
-  render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const { items } = this.props;
-    console.log(items);
-
-    return (
-      <Layout style={{ height: "100vh" }}>
-        <Navbar />
-        <Layout>
-          <Sidebar />
-          <Content style={{ margin: "24px 16px 0" }}>
+  return (
+    <Layout style={{ height: "100vh" }}>
+      <Navbar />
+      <Layout>
+        <Sidebar />
+        <Content style={{ margin: "24px 16px 0" }}>
+          <div
+            style={{
+              marginBottom: "24px",
+              fontSize: "16px",
+              fontWeight: "bold",
+            }}
+          >
+            KPR PENGAJUAN
+          </div>
+          <div
+            className={styles.sitelayoutbackground}
+            style={{ padding: 24, minHeight: 360 }}
+          >
             <div
               style={{
-                marginBottom: "24px",
-                fontSize: "16px",
-                fontWeight: "bold",
+                marginBottom: "16px",
+                position: "relative",
+                float: "right",
+                zIndex: "10",
               }}
             >
-              KPR PENGAJUAN
-            </div>
-            <div
-              className={styles.sitelayoutbackground}
-              style={{ padding: 24, minHeight: 360 }}
-            >
-              <div
-                style={{
-                  marginBottom: "16px",
-                  position: "relative",
-                  float: "right",
-                  zIndex: "10",
+              <Input
+                placeholder="Search Name"
+                value={value}
+                onChange={(e) => {
+                  const currValue = e.target.value;
+                  setValue(currValue);
+                  const filteredData = items.filter((entry) =>
+                    entry.data_nasabah.nama_nasabah
+                      .toLowerCase()
+                      .includes(currValue)
+                  );
+                  setDataSource(filteredData);
                 }}
-              >
-                {/* <Input.Search
-                  allowClear
-                  onSearch={(nameSearch) =>
-                    this.setState({
-                      items: this.props.items.filter((person) =>
-                        person.form.name
-                          .toString()
-                          .toLowerCase()
-                          .includes(nameSearch.toLowerCase())
-                      ),
-                    })
-                  }
-                /> */}
-                <Input.Search
-                  allowClear
-                  onSearch={(nameSearch) =>
-                    this.setState({
-                      items: this.props.items.filter((person) =>
-                        person.nama_nasabah
-                          .toString()
-                          .toLowerCase()
-                          .includes(nameSearch.toLowerCase())
-                      ),
-                    })
-                  }
-                />
-              </div>
-
-              <Table
-                pagination={{
-                  pageSize: 5,
-                  position: ["bottomCenter"],
-                }}
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={this.state.items}
-                rowKey={(row) => row.id}
               />
             </div>
-          </Content>
-        </Layout>
+            <Table
+              pagination={{
+                pageSize: 5,
+                position: ["bottomCenter"],
+              }}
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={dataSource}
+              rowKey={(row) => row._id}
+            />
+          </div>
+        </Content>
       </Layout>
-    );
-  }
+    </Layout>
+  );
 }
+
+pengajuan.getInitialProps = async () => {
+  // GET request using fetch with async/await
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "cache-control": "no-cache",
+      "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+    },
+  };
+  const data = await fetch(
+    `https://zenia-f7c7.restdb.io/rest/pengajuan`,
+    requestOptions
+  );
+  const items = await data.json();
+  return {
+    items,
+  };
+};
+
+export default pengajuan;

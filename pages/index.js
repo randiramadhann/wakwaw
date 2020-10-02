@@ -8,12 +8,10 @@ export default function Home() {
     <div className="homepage">
       <Head>
         <title>ZENIA</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
       </Head>
 
-      <Dashboard/>
-
-      
+      <Dashboard />
     </div>
   );
 }

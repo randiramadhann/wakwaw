@@ -1,17 +1,146 @@
-import React from "react";
-import { Layout } from "antd";
+import React, { useState } from "react";
+import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
+import Link from "next/link";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import fetch from "isomorphic-fetch";
+import Router from "next/router";
 
 import styles from "../../styles/Layout.module.css";
+
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
-import Table from "../../components/sidebar/kpr/selesai/table";
-import Create from "../../components/sidebar/kpr/selesai/add";
-import Search from "../../components/sidebar/kpr/selesai/search";
-import DeleteKpr from "../../components/sidebar/kpr/selesai/delete";
 
 const { Content } = Layout;
 
-function kprSelesai() {
+const columns = [
+  {
+    title: "Nama Nasabah",
+    dataIndex: ["data_nasabah", "nama_nasabah"],
+    // render: (record) => record.form.name,
+  },
+  {
+    title: "Nomor Rekening",
+    dataIndex: ["data_nasabah", "no_rek"],
+  },
+  {
+    title: "Status",
+    dataIndex: ["data_kpr", "status_kpr"],
+    render: (tags) => (
+      <>
+        {tags.map((tag) => {
+          let color = tag.length > 5 ? "geekblue" : "green";
+          if (tag === "selesai") {
+            color = "#219653";
+          }
+          if (tag === "ditolak") {
+            color = "#BDBDBD";
+          }
+          if (tag === "berhenti") {
+            color = "#EB5757";
+          }
+          return (
+            <Tag color={color} key={tag} style={{ borderRadius: "20px" }}>
+              {tag}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: "Target",
+    dataIndex: ["data_kpr", "target"],
+    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+  },
+  {
+    title: "Setoran",
+    dataIndex: ["data_kpr", "setoran"],
+    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+  },
+  {
+    title: "Terkumpul",
+    dataIndex: ["data_kpr", "terkumpul"],
+    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+  },
+  {
+    title: "",
+    key: "action",
+    render: (text, record) => (
+      <Space size="middle">
+        <Link href={`/kpr/${record._id}/detail`}>
+          <a>Detail</a>
+        </Link>
+        <Link href={`/kpr/${record._id}/edit`}>
+          <Button
+            type="primary"
+            shape="circle"
+            size="small"
+            icon={<EditOutlined />}
+            style={{
+              background: "#EFEFEF",
+              borderColor: "#EFEFEF",
+              color: "#333",
+            }}
+          />
+        </Link>
+      </Space>
+    ),
+  },
+];
+
+function selesai({ items }) {
+  const [dataSource, setDataSource] = useState(items);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [value, setValue] = useState("");
+  const [visible, setVisible] = useState(false);
+
+  // function warning() {
+  //   Modal.warning({
+  //     title: "Konfirmasi",
+  //     content: (
+  //       <div>
+  //         <p>Apakah anda yakin akan menghapus item ini?</p>
+  //       </div>
+  //     ),
+  //     visible: { visible },
+  //     onCancel() {
+  //       console.log("Cancel");
+  //     },
+  //     onOk: async () => {
+  //       const noteId = selectedRowKeys;
+  //       // DELETE request using fetch with async/await
+  //       const requestOptions = {
+  //         method: "DELETE",
+  //         headers: {
+  //           "cache-control": "no-cache",
+  //           "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+  //         },
+  //       };
+  //       try {
+  //         const deleted = await fetch(
+  //           `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+  //           requestOptions
+  //         );
+  //         Router.reload();
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     },
+  //   });
+  // }
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  // rowSelection object indicates the need for row selection
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedRowKeys(selectedRowKeys);
+      console.log(`selectedRowKeys: ${selectedRowKeys}`);
+    },
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Navbar />
@@ -25,13 +154,51 @@ function kprSelesai() {
               fontWeight: "bold",
             }}
           >
-            KPR SELESAI
+            KPR AKTIF
           </div>
           <div
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
-            <DeleteKpr />
+            <Modal
+              title="Warning !"
+              centered
+              visible={visible}
+              onOk={async () => {
+                const noteId = selectedRowKeys;
+                // DELETE request using fetch with async/await
+                const requestOptions = {
+                  method: "DELETE",
+                  headers: {
+                    "cache-control": "no-cache",
+                    "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+                  },
+                };
+                try {
+                  const deleted = await fetch(
+                    `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+                    requestOptions
+                  );
+                  Router.reload();
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+              onCancel={() => setVisible(false)}
+            >
+              <p>Apakah Anda Yakin Akan Menghapus nasabah ini ?</p>
+            </Modal>
+            <Button
+              type="primary"
+              shape="circle"
+              icon={<DeleteOutlined />}
+              size="middle"
+              onClick={() => setVisible(true)}
+              style={{
+                background: "#EB5757",
+                borderColor: "#EB5757",
+              }}
+            />
             <div
               style={{
                 marginBottom: "16px",
@@ -40,11 +207,31 @@ function kprSelesai() {
                 zIndex: "10",
               }}
             >
-              <Create />
-              <Search />
+              <Input
+                placeholder="Search Name"
+                value={value}
+                onChange={(e) => {
+                  const currValue = e.target.value;
+                  setValue(currValue);
+                  const filteredData = items.filter((entry) =>
+                    entry.data_nasabah.nama_nasabah
+                      .toLowerCase()
+                      .includes(currValue)
+                  );
+                  setDataSource(filteredData);
+                }}
+              />
             </div>
-
-            <Table />
+            <Table
+              pagination={{
+                pageSize: 5,
+                position: ["bottomCenter"],
+              }}
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={dataSource}
+              rowKey={(row) => row._id}
+            />
           </div>
         </Content>
       </Layout>
@@ -52,4 +239,23 @@ function kprSelesai() {
   );
 }
 
-export default kprSelesai;
+selesai.getInitialProps = async () => {
+  // GET request using fetch with async/await
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "cache-control": "no-cache",
+      "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+    },
+  };
+  const data = await fetch(
+    `https://zenia-f7c7.restdb.io/rest/selesai`,
+    requestOptions
+  );
+  const items = await data.json();
+  return {
+    items,
+  };
+};
+
+export default selesai;
