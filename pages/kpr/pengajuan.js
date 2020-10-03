@@ -113,16 +113,22 @@ function pengajuan({ items }) {
               }}
             >
               <Input
-                placeholder="Search Name"
+                placeholder="Search"
                 value={value}
                 onChange={(e) => {
                   const currValue = e.target.value;
                   setValue(currValue);
-                  const filteredData = items.filter((entry) =>
-                    entry.data_nasabah.nama_nasabah
-                      .toLowerCase()
-                      .includes(currValue)
-                  );
+                  const filteredData = items.filter((entry) => {
+                    return (
+                      //search filter multiple input with OR operator
+                      entry.data_nasabah.nama_nasabah
+                        .toLowerCase()
+                        .includes(currValue) ||
+                      entry.data_nasabah.no_rek
+                        .toLowerCase()
+                        .includes(currValue)
+                    );
+                  });
                   setDataSource(filteredData);
                 }}
               />
