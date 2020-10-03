@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 
@@ -11,6 +15,7 @@ import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
 const { Content } = Layout;
+const { confirm } = Modal;
 
 const columns = [
   {
@@ -92,46 +97,37 @@ function selesai({ items }) {
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
-  const [visible, setVisible] = useState(false);
 
-  // function warning() {
-  //   Modal.warning({
-  //     title: "Konfirmasi",
-  //     content: (
-  //       <div>
-  //         <p>Apakah anda yakin akan menghapus item ini?</p>
-  //       </div>
-  //     ),
-  //     visible: { visible },
-  //     onCancel() {
-  //       console.log("Cancel");
-  //     },
-  //     onOk: async () => {
-  //       const noteId = selectedRowKeys;
-  //       // DELETE request using fetch with async/await
-  //       const requestOptions = {
-  //         method: "DELETE",
-  //         headers: {
-  //           "cache-control": "no-cache",
-  //           "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
-  //         },
-  //       };
-  //       try {
-  //         const deleted = await fetch(
-  //           `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
-  //           requestOptions
-  //         );
-  //         Router.reload();
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     },
-  //   });
-  // }
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
+  //handle delete confirmation
+  function showConfirm() {
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleOutlined />,
+      onOk: async () => {
+        const noteId = selectedRowKeys;
+        // DELETE request using fetch with async/await
+        const requestOptions = {
+          method: "DELETE",
+          headers: {
+            "cache-control": "no-cache",
+            "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+          },
+        };
+        try {
+          const deleted = await fetch(
+            `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+            requestOptions
+          );
+          Router.reload();
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  }
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
@@ -160,40 +156,12 @@ function selesai({ items }) {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
-            <Modal
-              title="Warning !"
-              centered
-              visible={visible}
-              onOk={async () => {
-                const noteId = selectedRowKeys;
-                // DELETE request using fetch with async/await
-                const requestOptions = {
-                  method: "DELETE",
-                  headers: {
-                    "cache-control": "no-cache",
-                    "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
-                  },
-                };
-                try {
-                  const deleted = await fetch(
-                    `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
-                    requestOptions
-                  );
-                  Router.reload();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-              onCancel={() => setVisible(false)}
-            >
-              <p>Apakah Anda Yakin Akan Menghapus nasabah ini ?</p>
-            </Modal>
             <Button
               type="primary"
               shape="circle"
               icon={<DeleteOutlined />}
               size="middle"
-              onClick={() => setVisible(true)}
+              onClick={showConfirm}
               style={{
                 background: "#EB5757",
                 borderColor: "#EB5757",
