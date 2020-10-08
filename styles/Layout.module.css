@@ -58,3 +58,50 @@
   border: 1px solid #f0f0f0;
   border-radius: 2px;
 }
+
+.card {
+  position: relative;
+  width: 259px;
+  height: 112px;
+  background: #7ECFA2;
+}
+
+.card1 {
+  position: absolute;
+  top: 50;
+  left: 300;
+  width: 259px;
+  height: 48px;
+  background: #6FC997;
+}
+
+.columnCard {
+margin-left: 20px;
+}
+
+.textCard{
+position: absolute;
+left: 20;
+top: 10;
+font-family: Open Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 16px;
+color: #FFFFFF;
+}
+
+.textCard1{
+  text-align: left;
+   font-family: Open Sans;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 12px;
+ line-height: 16px;
+ }
+
+ .chart {
+  width: 538px;
+  height: 320px;
+  background: #FFFFFF;
+ }
