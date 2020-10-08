@@ -142,6 +142,31 @@ function edit({ items }) {
                   >
                     <Input />
                   </Form.Item>
+                  //yang background
+                  <Form.Item
+                    name="tgl_penyerahan"
+                    label="Tanggal Penyerahan"
+                    labelAlign="left"
+                    initialValue=""
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    name="waktu_penyerahan"
+                    label="Waktu Penyerahan"
+                    labelAlign="left"
+                    initialValue=""
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    name="lokasi"
+                    label="Lokasi"
+                    labelAlign="left"
+                    initialValue=""
+                  >
+                    <Input />
+                  </Form.Item>
                   <Form.Item>
                     <Space size="middle">
                       <Button
