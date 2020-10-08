@@ -105,6 +105,7 @@ function detail({ items }) {
                     <p>Pendidikan Terakhir </p>
                     <p>Status Perkawinan </p>
                     <p>Penghasilan </p>
+                    <p>Kemampuan Cicil</p>
                     <p>Nomor NPWP </p>
                     <p>Nama Ibu </p>
                     <p>Nomor KK </p>{" "}
@@ -119,6 +120,7 @@ function detail({ items }) {
                     <p>{dataKpr.data_nasabah.pendidikan_terakhir}</p>
                     <p>{dataKpr.data_nasabah.status_perkawinan}</p>
                     <p>{dataKpr.data_nasabah.penghasilan}</p>
+                    <p>0</p>
                     <p>{dataKpr.data_nasabah.npwp}</p>
                     <p>{dataKpr.data_nasabah.nama_ibu}</p>
                     <p>{dataKpr.data_nasabah.no_kk}</p>
@@ -130,7 +132,7 @@ function detail({ items }) {
                   <Col style={{ marginRight: "20px" }}>
                     <p>Email </p>
                     <p>Nomor Handphone </p>
-                    <p>Nomor Telephone Penjamin </p>
+                    <p>Nomor Telp Penjamin </p>
                     <p>Hubungan Penjamin </p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
@@ -180,7 +182,7 @@ function detail({ items }) {
                 </Row>
                 <Divider />
                 <Row>
-                  <Col style={{ marginRight: "118px" }}>
+                  <Col style={{ marginRight: "108px" }}>
                     <p>Foto Rumah</p>
                   </Col>
                   <Col>
@@ -193,7 +195,7 @@ function detail({ items }) {
                   onOk={handleOk}
                   onCancel={handleCancel}
                 >
-                  <img src=" + dataKpr.rumah_kpr.foto_rumah + " width="300px" />
+                  <img src={dataKpr.rumah_kpr.foto_rumah} width="300px" />
                 </Modal>
               </TabPane>
               <TabPane tab="Dokumen" key="6">

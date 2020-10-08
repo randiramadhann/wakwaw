@@ -21,7 +21,7 @@ function schedule() {
             <Calendar fullscreen={false} onChange={onChange} onOk={onOk} />
           </div>
         </Col>
-        <Col span={12}>
+        <Col span={10}>
           <h3 style={{ marginLeft: "100px" }}>JADWAL WAWANCARA</h3>
           <ul
             className="ant-timeline ant-timeline-label"
@@ -35,7 +35,8 @@ function schedule() {
                 style={{ borderColor: "orange" }}
               ></div>
               <div className={styles.anttimelineitemcontentorg}>
-                Create a services site 2015-09-01
+                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
+                Muh. Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-left">
@@ -48,9 +49,7 @@ function schedule() {
               <div
                 className="ant-timeline-item-content"
                 style={{ height: "50px" }}
-              >
-                Solve initial network problems 2015-09-01
-              </div>
+              ></div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-left">
               <div className="ant-timeline-item-label">12.00</div>
@@ -60,7 +59,8 @@ function schedule() {
                 style={{ borderColor: " #4399fad8" }}
               ></div>
               <div className={styles.anttimelineitemcontentblue}>
-                Technical testing 2015-09-01
+                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
+                Muh. Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-last ant-timeline-item-left">
@@ -74,7 +74,8 @@ function schedule() {
                 className="ant-timeline-item-content"
                 style={{ height: "50px" }}
               >
-                Network problems being solved 2015-09-01
+                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
+                Muh. Angga Saputra We..
               </div>
             </li>
           </ul>
