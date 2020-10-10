@@ -5,8 +5,9 @@ import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
 import Schedule from "../components/sidebar/dashboard/schedule";
-import Card from "../components/sidebar/home/Card";
-import CardKPR from "../components/sidebar/home/CardKPR";
+import Card from "../components/sidebar/home/Card"
+
+
 const { Content } = Layout;
 
 function dashboard() {
@@ -16,11 +17,12 @@ function dashboard() {
       <Layout>
         <Sidebar />
         <Content style={{ margin: "24px 16px 0" }}>
+            <Card/>
           <div
             className={styles.sitelayoutbackground}
-            style={{ padding: 24, minHeight: 360 }}
+            style={{ padding: 24, minHeight: 360, marginTop: 24 }}
           >
-            <Schedule />
+            <Schedule  />
           </div>
         </Content>
       </Layout>
