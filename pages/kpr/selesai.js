@@ -186,10 +186,10 @@ function selesai({ items }) {
                       //search filter multiple input with OR operator
                       entry.data_nasabah.nama_nasabah
                         .toLowerCase()
-                        .includes(currValue) ||
+                        .includes(currValue.toLowerCase()) ||
                       entry.data_nasabah.no_rek
                         .toLowerCase()
-                        .includes(currValue)
+                        .includes(currValue.toLowerCase())
                     );
                   });
                   setDataSource(filteredData);

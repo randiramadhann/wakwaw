@@ -97,7 +97,7 @@ function edit({ items }) {
                     labelAlign="left"
                     initialValue={dataKpr.data_kpr.tgl_approval}
                   >
-                    <Input />
+                    <Input type="date"/>
                   </Form.Item>
                   <Form.Item
                     name="tgl_target"
@@ -105,7 +105,7 @@ function edit({ items }) {
                     labelAlign="left"
                     initialValue={dataKpr.data_kpr.tgl_selesai}
                   >
-                    <Input />
+                    <Input type="date" />
                   </Form.Item>
                   <Form.Item name="status" label="Status KPR" labelAlign="left">
                     <Radio.Group
@@ -122,17 +122,15 @@ function edit({ items }) {
                     name="tgl_wawancara"
                     label="Tanggal Wawancara"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.jadwal_wawancara}
                   >
-                    <Input />
+                    <Input type="date" />
                   </Form.Item>
                   <Form.Item
                     name="waktu_wawancara"
                     label="Waktu Wawancara"
                     labelAlign="left"
-                    initialValue=""
                   >
-                    <Input />
+                    <Input type="time" />
                   </Form.Item>
                   <Form.Item
                     name="pewawancara"
@@ -142,22 +140,19 @@ function edit({ items }) {
                   >
                     <Input />
                   </Form.Item>
-                  //yang background
                   <Form.Item
                     name="tgl_penyerahan"
                     label="Tanggal Penyerahan"
                     labelAlign="left"
-                    initialValue=""
                   >
-                    <Input />
+                    <Input type="date" />
                   </Form.Item>
                   <Form.Item
                     name="waktu_penyerahan"
                     label="Waktu Penyerahan"
                     labelAlign="left"
-                    initialValue=""
                   >
-                    <Input />
+                    <Input type="time" />
                   </Form.Item>
                   <Form.Item
                     name="lokasi"
