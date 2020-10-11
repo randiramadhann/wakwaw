@@ -97,6 +97,11 @@ function sidebar({ router }) {
             </Link>
           </Menu.Item>
         </SubMenu>
+        <Menu.Item key="/topup/topup" icon={<DesktopOutlined />}>
+          <Link href="/topup/topup">
+            <a>Top Up</a>
+          </Link>
+        </Menu.Item>
         <Menu.Item key="/dataadmin" icon={<UserOutlined />}>
           <Link href="/dataadmin">
             <a>Data Admin</a>

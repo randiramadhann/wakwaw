@@ -105,3 +105,8 @@ color: #FFFFFF;
   height: 320px;
   background: #FFFFFF;
  }
+
+ .ant-list-pagination ul.ant-pagination {
+   position: relative;
+   left: 1000
+ }
