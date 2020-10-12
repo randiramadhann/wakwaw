@@ -9,7 +9,8 @@ class LoadMoreList extends React.Component {
       listData.push({
         href: 'https://ant.design',
         title: `ini notif Nasabah ${i}`,
-        avatar: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.clipartmax.com%2Fmiddle%2Fm2i8m2A0K9H7N4m2_person-icons-person-icon%2F&psig=AOvVaw1gC3Aun079p39Qa_6kX5Sx&ust=1600098879775000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDxk-2-5usCFQAAAAAdAAAAABAO',
+        // avatar: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.clipartmax.com%2Fmiddle%2Fm2i8m2A0K9H7N4m2_person-icons-person-icon%2F&psig=AOvVaw1gC3Aun079p39Qa_6kX5Sx&ust=1600098879775000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDxk-2-5usCFQAAAAAdAAAAABAO',
+        avatar: '/notif-user.png'
       });
     }
 

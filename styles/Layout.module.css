@@ -4,6 +4,7 @@
 
 .sitelayoutsubheaderbackground {
   background: #fff;
+  box-shadow: 0px 8px 8px -6px #001c72;
 }
 
 .sitelayoutbackground {
@@ -63,7 +64,7 @@
   position: relative;
   width: 259px;
   height: 112px;
-  background: #7ECFA2;
+  background: #7ecfa2;
 }
 
 .card1 {
@@ -72,36 +73,36 @@
   left: 300;
   width: 259px;
   height: 48px;
-  background: #6FC997;
+  background: #6fc997;
 }
 
 .columnCard {
-margin-left: 20px;
+  margin-left: 20px;
 }
 
-.textCard{
-position: absolute;
-left: 20;
-top: 10;
-font-family: Open Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 12px;
-line-height: 16px;
-color: #FFFFFF;
+.textCard {
+  position: absolute;
+  left: 20;
+  top: 10;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
 }
 
-.textCard1{
+.textCard1 {
   text-align: left;
-   font-family: Open Sans;
- font-style: normal;
- font-weight: bold;
- font-size: 12px;
- line-height: 16px;
- }
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+}
 
- .chart {
+.chart {
   width: 538px;
   height: 320px;
-  background: #FFFFFF;
- }
+  background: #ffffff;
+}
