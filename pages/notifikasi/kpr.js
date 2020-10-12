@@ -1,5 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
+import Head from "next/head";
+
 import Notifikasi from '../../components/sidebar/notifikasi/kpr';
 import styles from "../../styles/Layout.module.css";
 import Sidebar from "../../components/layout/Sidebar";
@@ -9,6 +11,11 @@ const { Content } = Layout;
 
 function notifKpr() {
   return (
+    <>
+    <Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -23,6 +30,7 @@ function notifKpr() {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 

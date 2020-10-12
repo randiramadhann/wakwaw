@@ -5,13 +5,13 @@ import Login from "../pages/login";
 
 export default function Home() {
   return (
-    <div className="homepage">
+    <>
       <Head>
-        <title>ZENIA</title>
+        <title>ZENIA ADMIN</title>
         <link rel="icon" href="/logo.png" />
       </Head>
 
       <Dashboard />
-    </div>
+    </>
   );
 }

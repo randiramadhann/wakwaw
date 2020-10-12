@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
+import Head from "next/head";
 
 import styles from "../../styles/Layout.module.css";
 
@@ -138,6 +139,11 @@ function selesai({ items }) {
   };
 
   return (
+    <>
+    <Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -210,6 +216,7 @@ function selesai({ items }) {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 

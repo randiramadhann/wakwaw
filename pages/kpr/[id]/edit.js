@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Tabs, Button, Form, Input, Radio, Space } from "antd";
 import fetch from "isomorphic-fetch";
+import Head from "next/head";
 
 import styles from "../../../styles/Layout.module.css";
 import Sidebar from "../../../components/layout/Sidebar";
@@ -34,6 +35,12 @@ function edit({ items }) {
     },
   };
   return (
+    <>
+    <Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
+
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -612,6 +619,7 @@ function edit({ items }) {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 

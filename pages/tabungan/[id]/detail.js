@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Tabs, Button, Divider, Row, Col, Modal } from "antd";
 import fetch from "isomorphic-fetch";
+import Head from "next/head";
 
 import styles from "../../../styles/Layout.module.css";
 import Sidebar from "../../../components/layout/Sidebar";
@@ -30,6 +31,11 @@ function detail({ items }) {
   };
 
   return (
+    <>
+    <Head>
+        <title>ZENIA ADMIN</title>
+        <link rel="icon" href="/logo.png" />
+      </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -113,6 +119,7 @@ function detail({ items }) {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 

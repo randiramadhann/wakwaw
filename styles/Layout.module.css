@@ -106,10 +106,8 @@
   height: 320px;
   background: #ffffff;
 }
-  background: #FFFFFF;
- }
 
- .ant-list-pagination ul.ant-pagination {
-   position: relative;
-   left: 1000
- }
+.ant-list-pagination ul.ant-pagination {
+  position: relative;
+  left: 1000;
+}
