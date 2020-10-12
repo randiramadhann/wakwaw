@@ -1,10 +1,39 @@
 import { Card, Avatar, Row, Col } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import styles from "../../../styles/Layout.module.css";
+import {Line} from 'react-chartjs-2';
 // import Chart from "../home/Chart.js";
-
+import Chart from "../home/Chart";
 const { Meta } = Card;
 
+
+const data = {
+    labels: ['2016', '2017', '2018', '2019', '2020'],
+    datasets: [
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 4,
+        pointRadius: 1,
+        pointHitRadius: 5,
+        data: [5, 13, 10,16]
+      }
+    ]
+  };
+  
 
 class CardInfo extends React.Component {
     render() {
@@ -112,8 +141,16 @@ class CardInfo extends React.Component {
                         </Col>
                         <Col style={{marginTop: 24}}>
                             <div className={styles.chart} style={{ backgroundColor: "#ffffff", marginLeft: 20, height: 344 }}>
-                                <h1 className={styles.textCard1} style={{ color: "#000000", position: "absolute", left: 44, top: 24 }}>PERTUMBUHAN PENGGUNA ZENIA</h1>
-                            </div>
+                                <h1 className={styles.textCard1} style={{ color: "#000000", position: "absolute", left: 44, top: 24 }}>PERTUMBUHAN PENGGUNA ZENIA</h1> 
+                                <br/>
+                                <br/>
+                                <br/>
+                                <Line
+                                    data={data}
+                                    width={400}
+                                    height={200}
+                                />
+                            </div>   
                         </Col>
                     </Row>
                 </div>
