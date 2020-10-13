@@ -19,42 +19,31 @@ const columns = [
     // render: (record) => record.form.name,
   },
   {
-    title: "Nomor Rekening",
-    dataIndex: ["data_nasabah", "no_rek"],
-  },
-  {
-    title: "Status Tabungan",
+    title: "Status",
     dataIndex: ["data_kpr", "status_kpr"],
     render: (value) => (
-      <Tag style={{ borderRadius: "20px" }} color="#2F80ED">
+      <Tag style={{ borderRadius: "20px" }} color="#F2994A">
         {value}
       </Tag>
     ),
   },
   {
-    title: "Target",
-    dataIndex: ["data_kpr", "target"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    title: "Nomor Rekening",
+    dataIndex: ["data_nasabah", "no_rek"],
   },
   {
-    title: "Setoran",
-    dataIndex: ["data_kpr", "setoran"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-  },
-  {
-    title: "Terkumpul",
-    dataIndex: ["data_kpr", "terkumpul"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    title: "Nomor Handphone",
+    dataIndex: ["data_nasabah", "no_rek"],
   },
   {
     title: "",
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <Link href={`/tabungan/${record._id}/detail`}>
+        <Link href={`/datanasabah/${record._id}/detail`}>
           <a>Detail</a>
         </Link>
-        <Link href={`/tabungan/${record._id}/edit`}>
+        <Link href={`/datanasabah/${record._id}/edit`}>
           <Button
             type="primary"
             shape="circle"
@@ -72,7 +61,7 @@ const columns = [
   },
 ];
 
-function aktif({ items }) {
+function pengajuan({ items }) {
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
@@ -98,7 +87,7 @@ function aktif({ items }) {
               fontWeight: "bold",
             }}
           >
-            TABUNGAN AKTIF
+            DATA NASABAH
           </div>
           <div
             className={styles.sitelayoutbackground}
@@ -150,7 +139,7 @@ function aktif({ items }) {
   );
 }
 
-aktif.getInitialProps = async () => {
+pengajuan.getInitialProps = async () => {
   // GET request using fetch with async/await
   const requestOptions = {
     method: "GET",
@@ -160,7 +149,7 @@ aktif.getInitialProps = async () => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/aktif`,
+    `https://zenia-f7c7.restdb.io/rest/pengajuan`,
     requestOptions
   );
   const items = await data.json();
@@ -169,4 +158,4 @@ aktif.getInitialProps = async () => {
   };
 };
 
-export default aktif;
+export default pengajuan;

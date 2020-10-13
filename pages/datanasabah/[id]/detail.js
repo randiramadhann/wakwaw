@@ -40,49 +40,34 @@ function detail({ items }) {
             style={{ padding: 24, minHeight: 360 }}
           >
             <Tabs defaultActiveKey="1">
-              <TabPane tab="Data Tabungan" key="1">
+              <TabPane tab="Data Nasabah" key="1">
                 <Row>
                   <Col style={{ marginRight: "90px" }}>
-                    <p>Target </p>
-                    <p>Setoran</p>
-                    <p>Terkumpul</p>
-                    <p>Frekuensi Setoran</p>
-                    <p>Metode Setoran</p>
+                    <p>Nama Nasabah </p>
+                    <p>Nomor Rekening</p>
+                    <p>Nomor KTP</p>
+                    <p>Nomor HP</p>
+                    <p>Email </p>
+                    <p>Tempat dan Tanggal Lahir</p>
+                    <p>Alamat</p>
+                    <p>Jenis Kelamin</p>
+                    <p>Pekerjaan</p>
+                    <p>Nomor NPWP</p>
+                    <p>Status Akun</p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
                     <p>Rp {dataKpr.data_kpr.target}</p>
                     <p>Rp {dataKpr.data_kpr.setoran}</p>
                     <p>Rp {dataKpr.data_kpr.terkumpul}</p>
                     <p>{dataKpr.data_kpr.metode}</p>
-                    <p>{dataKpr.data_kpr.metode}</p>
                   </Col>
                 </Row>
+                <br/>
                 <Divider />
                 <Row>
-                  <Col style={{ marginRight: "105px" }}>
-                    <p>Judul tabungan</p>
-                    <p>Tanggal dibuat</p>
-                    <p>Tanggal Selesai</p>
-                  </Col>
-                  <Col style={{ fontWeight: "bold" }}>
-                    <p>{dataKpr.data_kpr.tgl_pengajuan}</p>
-                    <p>{dataKpr.data_kpr.tgl_approval}</p>
-                    <p>{dataKpr.data_kpr.tgl_selesai}</p>
-                  </Col>
-                </Row>
-                <Divider/>
-                <Row>
-                  <Col style={{ marginRight: "90px"}}>
-                    <p>Status Tabungan</p>
-                  </Col>
-                  <Col style={{ fontWeight: "bold" }}>
-                    <p>{dataKpr.data_kpr.status_kpr}</p>
-                  </Col>
-                </Row>
-                <Divider/>
-                <Row style={{ marginBottom: "20px" }}>
-                  <Col  style={{ marginRight: "118px" }}>
-                    <p>Foto Rumah</p>
+                  <Col style={{ marginRight: "180px" }}>
+                    <p>Foto KTP</p>
+                    <p>Foto Selfie</p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
                     <a onClick={showModal}>rumah.jpeg</a>
@@ -96,8 +81,9 @@ function detail({ items }) {
                   <img src={dataKpr.rumah_kpr.foto_rumah} width="300px" />
                 </Modal>
                 </Row>
+                <Divider />
                 <Button
-                  href={`/tabungan/${items._id}/edit`}
+                  href={`/datanasabah/${items._id}/edit`}
                   type="primary"
                   style={{
                     width: "80px",

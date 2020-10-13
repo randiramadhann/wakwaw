@@ -63,12 +63,19 @@ function sidebar({ router }) {
             </Link>
           </Menu.Item>
         </SubMenu>
-        <Menu.Item key="/datanasabah" icon={<TeamOutlined />}>
-          <Link href="/datanasabah">
-            <a>Data Nasabah</a>
-          </Link>
-        </Menu.Item>
-        <SubMenu key="sub2" icon={<WalletOutlined />} title="Tabungan">
+        <SubMenu key="sub2" icon={<TeamOutlined />} title="Data Nasabah">
+          <Menu.Item key="/datanasabah/verifikasi">
+            <Link href="/datanasabah/verifikasi">
+              <a>Verifikasi</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/datanasabah/nonverifikasi">
+            <Link href="/datanasabah/nonverifikasi">
+              <a>Belum Diverifikasi</a>
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub3" icon={<WalletOutlined />} title="Tabungan">
           <Menu.Item key="/tabungan/aktif">
             <Link href="/tabungan/aktif">
               <a>Aktif</a>
@@ -80,7 +87,7 @@ function sidebar({ router }) {
             </Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="sub3" icon={<HomeOutlined />} title="KPR">
+        <SubMenu key="sub4" icon={<HomeOutlined />} title="KPR">
           <Menu.Item key="/kpr/pengajuan">
             <Link href="/kpr/pengajuan">
               <a>Pengajuan</a>
