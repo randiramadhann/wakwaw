@@ -167,7 +167,7 @@ pengajuan.getInitialProps = async () => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia?q={"data_kpr":{"status_kpr":"pengajuan"}}`,
     requestOptions
   );
   const items = await data.json();

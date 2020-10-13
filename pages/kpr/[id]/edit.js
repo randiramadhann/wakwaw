@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Tabs, Button, Form, Input, Radio, Space } from "antd";
 import fetch from "isomorphic-fetch";
 import Head from "next/head";
+import { useRouter } from 'next/router';
 
 import styles from "../../../styles/Layout.module.css";
 import Sidebar from "../../../components/layout/Sidebar";
@@ -13,8 +14,10 @@ const { TabPane } = Tabs;
 function edit({ items }) {
   const [dataKpr, setDataKpr] = useState(items);
   const [value, setValue] = useState();
+  const [form, setForm] = useState({target:items.data_kpr.target, setoran:items.data_kpr.setoran,terkumpul:items.data_kpr.terkumpul,metode:items.data_kpr.metode,tgl_pengajuan:items.data_kpr.tgl_pengajuan,tgl_approval:items.data_kpr.tgl_approval,tgl_selesai:items.data_kpr.tgl_selesai,status_kpr:items.data_kpr.status_kpr,tanggal_wawancara:items.data_kpr.tanggal_wawancara,waktu_wawancara:items.data_kpr.waktu_wawancara,tanggal_penyerahan:items.data_kpr.tanggal_penyerahan,waktu_penyerahan:items.data_kpr.waktu_penyerahan,pewawancara:items.data_kpr.pewawancara});
+  const router = useRouter();
 
-  console.log(dataKpr);
+  // console.log(dataKpr);
 
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
@@ -23,9 +26,37 @@ function edit({ items }) {
     });
   };
 
-  const onFinish = (values) => {
-    console.log("Form:", values);
-  };
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+}
+
+  // const onFinish = (values) => {
+  //   // console.log("Form:", values);
+  //   // setForm(values)
+  //   console.log({data_kpr:form});
+  // };
+
+  const onFinish = async () => {
+    try {
+        const res = await fetch(`https://zenia-f7c7.restdb.io/rest/kprzenia/${router.query.id}`, {
+            method: 'PUT',
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "cache-control": "no-cache",
+              "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+            },
+            body: JSON.stringify({data_kpr:form})
+        })
+        router.reload();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
   const layout = {
     labelCol: {
       span: 6,
@@ -62,31 +93,31 @@ function edit({ items }) {
                     name="target"
                     label="Target"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.target}
+                    initialValue={form.target}
                   >
-                    <Input />
+                    <Input name="target" onChange={handleChange} />
                   </Form.Item>
                   <Form.Item
                     name="setoran"
                     label="Setoran"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.setoran}
+                    initialValue={form.setoran}
                   >
-                    <Input />
+                    <Input name="setoran" onChange={handleChange}  />
                   </Form.Item>
                   <Form.Item
                     name="terkumpul"
                     label="Terkumpul"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.terkumpul}
+                    initialValue={form.terkumpul}
                   >
-                    <Input />
+                    <Input name="terkumpul" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="metode_setoran"
                     label="Metode Setoran"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.metode}
+                    initialValue={form.metode}
                   >
                     <Input />
                   </Form.Item>
@@ -94,30 +125,31 @@ function edit({ items }) {
                     name="tgl_pengajuan"
                     label="Tanggal Pengajuan"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_pengajuan}
+                    initialValue={form.tgl_pengajuan}
                   >
-                    <Input />
+                    <Input type="date" name="tgl_pengajuan" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="tgl_approve"
                     label="Tanggal Approval"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_approval}
+                    initialValue={form.tgl_approval}
                   >
-                    <Input type="date"/>
+                    <Input type="date" name="tgl_approve" onChange={handleChange} />
                   </Form.Item>
                   <Form.Item
                     name="tgl_target"
                     label="Tanggal Target Selesai"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_selesai}
+                    initialValue={form.tgl_selesai}
                   >
-                    <Input type="date" />
+                    <Input type="date" name="tgl_target" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item name="status" label="Status KPR" labelAlign="left">
                     <Radio.Group
-                      onChange={onChange}
-                      defaultValue={dataKpr.data_kpr.status_kpr}
+                    name="status"
+                      onChange={handleChange}
+                      defaultValue={form.status_kpr}
                     >
                       <Radio value="pengajuan">Pengajuan</Radio>
                       <Radio value="aktif">Aktif</Radio>
@@ -129,37 +161,41 @@ function edit({ items }) {
                     name="tgl_wawancara"
                     label="Tanggal Wawancara"
                     labelAlign="left"
+                    initialValue={form.tanggal_wawancara}
                   >
-                    <Input type="date" />
+                    <Input type="date" name="tanggal_wawancara" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="waktu_wawancara"
                     label="Waktu Wawancara"
                     labelAlign="left"
+                    initialValue={form.waktu_wawancara}
                   >
-                    <Input type="time" />
+                    <Input type="time" name="waktu_wawancara" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="pewawancara"
                     label="Pewawancara"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.pewawancara}
+                    initialValue={form.pewawancara}
                   >
-                    <Input />
+                    <Input name="pewawancara" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="tgl_penyerahan"
                     label="Tanggal Penyerahan"
                     labelAlign="left"
+                    initialValue={form.tanggal_penyerahan}
                   >
-                    <Input type="date" />
+                    <Input type="date" name="tanggal_penyerahan" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="waktu_penyerahan"
                     label="Waktu Penyerahan"
                     labelAlign="left"
+                    initialValue={form.waktu_penyerahan}
                   >
-                    <Input type="time" />
+                    <Input type="time" name="waktu_penyerahan" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="lokasi"
@@ -633,7 +669,7 @@ edit.getInitialProps = async ({ query: { id } }) => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan/${id}`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia/${id}`,
     requestOptions
   );
   const items = await data.json();

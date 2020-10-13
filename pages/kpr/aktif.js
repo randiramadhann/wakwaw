@@ -167,7 +167,7 @@ aktif.getInitialProps = async () => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/aktif`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia?q={"data_kpr":{"status_kpr":"aktif"}}`,
     requestOptions
   );
   const items = await data.json();

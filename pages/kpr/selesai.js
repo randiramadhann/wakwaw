@@ -31,27 +31,41 @@ const columns = [
   {
     title: "Status",
     dataIndex: ["data_kpr", "status_kpr"],
-    render: (tags) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "selesai") {
-            color = "#219653";
-          }
-          if (tag === "ditolak") {
-            color = "#BDBDBD";
-          }
-          if (tag === "berhenti") {
-            color = "#EB5757";
-          }
-          return (
-            <Tag color={color} key={tag} style={{ borderRadius: "20px" }}>
-              {tag}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    render: (value)=>{
+      let color = "geekblue";
+      if(value==="selesai"){
+        color="#219653";
+      }
+      if(value==="ditolak"){
+        color="#BDBDBD"
+      }
+      return (
+          <Tag color={color} key={value} style={{ borderRadius: "20px" }}>
+               {value}
+          </Tag>
+           );
+    },
+    // // render: (tags) => (
+    // //   <>
+    // //     {tags.map((tag) => {
+    // //       let color = tag.length > 5 ? "geekblue" : "green";
+    // //       if (tag === "selesai") {
+    // //         color = "#219653";
+    // //       }
+    // //       if (tag === "ditolak") {
+    // //         color = "#BDBDBD";
+    // //       }
+    // //       if (tag === "berhenti") {
+    // //         color = "#EB5757";
+    // //       }
+    // //       return (
+    // //         <Tag color={color} key={tag} style={{ borderRadius: "20px" }}>
+    // //           {tag}
+    // //         </Tag>
+    // //       );
+    // //     })}
+    // //   </>
+    // ),
   },
   {
     title: "Target",
@@ -230,7 +244,7 @@ selesai.getInitialProps = async () => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/selesai`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia?q={"$or":[{"data_kpr":{"status_kpr":"ditolak"}},{"data_kpr":{"status_kpr":"selesai"}}]}`,
     requestOptions
   );
   const items = await data.json();
