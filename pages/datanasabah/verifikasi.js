@@ -87,7 +87,7 @@ function pengajuan({ items }) {
               fontWeight: "bold",
             }}
           >
-            KPR PENGAJUAN
+            DATA NASABAH
           </div>
           <div
             className={styles.sitelayoutbackground}
