@@ -109,7 +109,7 @@ function sidebar({ router }) {
             <a>Top Up</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="/dataadmin" icon={<UserOutlined />}>
+        <Menu.Item key="/dataadmin/" icon={<UserOutlined />}>
           <Link href="/dataadmin">
             <a>Data Admin</a>
           </Link>
