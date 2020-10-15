@@ -4,11 +4,9 @@ import Link from "next/link";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
-import Head from "next/head";
-import cookies from 'nookies'
-import axios from 'axios'
 
 import styles from "../../styles/Layout.module.css";
+
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
@@ -17,46 +15,35 @@ const { Content } = Layout;
 const columns = [
   {
     title: "Nama Nasabah",
-    dataIndex: "account_name",
-    // render: (record) => record.account_name,
+    dataIndex: ["data_nasabah", "nama_nasabah"],
+    // render: (record) => record.form.name,
+  },
+  {
+    title: "Status",
+    dataIndex: ["data_kpr", "status_kpr"],
+    render: (value) => (
+      <Tag style={{ borderRadius: "20px" }} color="#54ADFF">
+        {value}
+      </Tag>
+    ),
   },
   {
     title: "Nomor Rekening",
     dataIndex: ["data_nasabah", "no_rek"],
   },
   {
-    title: "Status Tabungan",
-    dataIndex: ["data_kpr", "status_kpr"],
-    render: (value) => (
-      <Tag style={{ borderRadius: "20px" }} color="#2F80ED">
-        {value}
-      </Tag>
-    ),
-  },
-  {
-    title: "Target",
-    dataIndex: "saving_plan_target",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-  },
-  {
-    title: "Setoran",
-    dataIndex: "saving_pla_deposit",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-  },
-  {
-    title: "Terkumpul",
-    dataIndex: "saving_plan_nominal",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    title: "Nomor Hanphone",
+    dataIndex: ["data_nasabah", "no_rek"],
   },
   {
     title: "",
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <Link href={`/tabungan/${record.id}/detail`}>
+        <Link href={`/datanasabah/${record._id}/detail`}>
           <a>Detail</a>
         </Link>
-        <Link href={`/tabungan/${record.id}/edit`}>
+        <Link href={`/datanasabah/${record._id}/edit`}>
           <Button
             type="primary"
             shape="circle"
@@ -74,12 +61,11 @@ const columns = [
   },
 ];
 
-function aktif({items}) {
+function pengajuan({ items }) {
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
-  console.log(dataSource)
-  
+
   // rowSelection object indicates the need for row selection
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -101,7 +87,7 @@ function aktif({items}) {
               fontWeight: "bold",
             }}
           >
-            TABUNGAN AKTIF
+            DATA NASABAH
           </div>
           <div
             className={styles.sitelayoutbackground}
@@ -124,12 +110,12 @@ function aktif({items}) {
                   const filteredData = items.filter((entry) => {
                     return (
                       //search filter multiple input with OR operator
-                      entry.account_name
+                      entry.data_nasabah.nama_nasabah
                         .toLowerCase()
-                        .includes(currValue) ||
-                      entry.account_number
+                        .includes(currValue.toLowerCase()) ||
+                      entry.data_nasabah.no_rek
                         .toLowerCase()
-                        .includes(currValue)
+                        .includes(currValue.toLowerCase())
                     );
                   });
                   setDataSource(filteredData);
@@ -144,27 +130,32 @@ function aktif({items}) {
               rowSelection={rowSelection}
               columns={columns}
               dataSource={dataSource}
-              rowKey={(row) => row.id}
-            /> 
-         </div> 
+              rowKey={(row) => row._id}
+            />
+          </div>
         </Content>
       </Layout>
     </Layout>
   );
 }
 
-aktif.getInitialProps = async context => {
-  //ambil token dari cookiesnya dulu
-  const { token } = cookies.get(context);
-  //await get pakai axios di return dalam bentuk items
-  const response =await axios.get('http://157.245.62.77:8080/api/dashboard/savings', {
+pengajuan.getInitialProps = async () => {
+  // GET request using fetch with async/await
+  const requestOptions = {
+    method: "GET",
     headers: {
-      "Authorization" : 'Bearer ' + token
-    }})
-    console.log("the response:", response.data)
-    return{
-      items: response.data.data
-    }
+      "cache-control": "no-cache",
+      "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+    },
+  };
+  const data = await fetch(
+    `https://zenia-f7c7.restdb.io/rest/pengajuan`,
+    requestOptions
+  );
+  const items = await data.json();
+  return {
+    items,
+  };
 };
 
-export default aktif;
+export default pengajuan;

@@ -1,7 +1,18 @@
 import React, { useState } from "react";
-import { Layout, Tabs, Button, Form, Row, Col, Input, Divider, Space } from "antd";
+import {
+  Layout,
+  Tabs,
+  Button,
+  Form,
+  Row,
+  Col,
+  Input,
+  Space,
+  Modal,
+  Select
+} from "antd";
 import fetch from "isomorphic-fetch";
-import Head from "next/head";
+import {DownOutlined} from "@ant-design/icons";
 
 import styles from "../../styles/Layout.module.css";
 import Sidebar from "../../components/layout/Sidebar";
@@ -12,9 +23,28 @@ const { TabPane } = Tabs;
 
 function edit({ items }) {
   const [dataKpr, setDataKpr] = useState(items);
+  const [visible, setVisible] = useState(false);
   const [value, setValue] = useState();
 
   console.log(dataKpr);
+
+  //select
+  
+
+  //handle modal
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = (e) => {
+    console.log(e);
+    setVisible(false);
+  };
+
+  const handleCancel = (e) => {
+    console.log(e);
+    setVisible(false);
+  };
 
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
@@ -35,11 +65,6 @@ function edit({ items }) {
     },
   };
   return (
-    <>
-    <Head>
-        <title>ZENIA ADMIN</title>
-        <link rel="icon" href="/logo.png" />
-      </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -63,7 +88,16 @@ function edit({ items }) {
                     labelAlign="left"
                     // initialValue=
                   >
-                    <Input />
+                    <div >
+                      <select style={{width: 500, height: 32, fontWeight: "bold", border: "1px solid #CFCFCF", boxSizing: "border-box", borderRadius: "5px"}}
+                        placeholder="add/select a value" onfocus="this.select()"
+                        onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                        <option value="one" >Tunai</option>
+                        <option value="two" >Transfer Sesama Zenia</option>
+                        <option value="three" >Transfer Antar Bank</option>
+                      </select>
+                     <input name="idValue" id="idValue" type="hidden"/>
+                    </div>
                   </Form.Item>
                   <Form.Item
                     name="jumlah"
@@ -71,7 +105,7 @@ function edit({ items }) {
                     labelAlign="left"
                     // initialValue=
                   >
-                    <Input />
+                    <Input type="number"/>
                   </Form.Item>
                   <Form.Item
                     name="nomorrekening"
@@ -79,7 +113,7 @@ function edit({ items }) {
                     labelAlign="left"
                     // initialValue=
                   >
-                    <Input />
+                    <Input type="number" style={{ fontWeight: "bold" }} />
                   </Form.Item>
                   <Form.Item>
                     <Space size="middle">
@@ -88,11 +122,32 @@ function edit({ items }) {
                           width: "80px",
                           background: "#3BA1FF",
                           borderColor: "#3BA1FF",
-                          marginTop: "30px"
+                          marginTop: "30px",
                         }}
+                        onClick={showModal}
                       >
-                        <p style={{color: "#ffffff"}}>Proses</p>
+                        <p style={{ color: "#ffffff" }}>Proses</p>
                       </Button>
+                      <Modal
+                        title="Please Confirm"
+                        visible={visible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                      >
+                        <p>Apakah anda yakin melakukan pengisian <span style={{fontWeight: "bold"}}>Saldo Rekening</span></p>
+                        <Row>
+                          <Col>
+                            <p>Nasabah</p>
+                            <p>No Rekening</p>
+                            <p>Jumlah</p>
+                          </Col>
+                          <Col>
+                            <p>Nasabah</p>
+                            <p>No Rekening</p>
+                            <p>Jumlah</p>
+                          </Col>
+                        </Row>
+                      </Modal>
                     </Space>{" "}
                   </Form.Item>
                 </Form>
@@ -102,7 +157,6 @@ function edit({ items }) {
         </Content>
       </Layout>
     </Layout>
-    </>
   );
 }
 
