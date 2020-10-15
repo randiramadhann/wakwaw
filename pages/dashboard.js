@@ -1,17 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 import { Layout} from "antd";
 import Head from "next/head";
+
 
 import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
 import Schedule from "../components/sidebar/dashboard/schedule";
 import Card from "../components/sidebar/home/Card"
+import {withAuth} from "../utils/withAuth"
 
 
-const { Content } = Layout;
+const { Content,Footer } = Layout;
 
 function dashboard() {
+
   return (
     <>
     <Head>
@@ -25,17 +28,15 @@ function dashboard() {
         <Sidebar />
         <Content style={{ margin: "24px 16px 0" }}>
             <Card/>
-          <div
-            className={styles.sitelayoutbackground}
-            style={{ padding: 24, minHeight: 360, marginTop: 24 }}
-          >
             <Schedule  />
-          </div>
+             <div style={{width:"1096px"}}><Footer style={{ textAlign: 'center',background:"#fff",color:"#000" }}>&#169; 2020 Zenia Indonesia Dashboard</Footer></div>
         </Content>
+        
       </Layout>
+      
     </Layout>
     </>
   );
 }
 
-export default dashboard;
+export default withAuth(dashboard);

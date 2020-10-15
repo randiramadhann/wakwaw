@@ -2,8 +2,9 @@ import React from "react";
 import Head from "next/head";
 import Dashboard from "./dashboard";
 import Login from "../pages/login";
+import {withAuth} from "../utils/withAuth"
 
-export default function Home() {
+function Home() {
   return (
     <>
       <Head>
@@ -15,3 +16,4 @@ export default function Home() {
     </>
   );
 }
+export default withAuth(Home)

@@ -14,15 +14,15 @@ function onOk(value) {
 
 function schedule() {
   return (
-    <div className="schedule">
-      <Row>
-        <Col span={6}>
+    <div className="schedule" style={{marginTop:"24px", background:"#fff", width:"1096px", marginBottom:"24px"}}>
+      <Row style={{padding:"24px"}}>
+        <Col span={8} style={{marginTop:"24px"}}>
           <div className={styles.sitecalendardemocard}>
             <Calendar fullscreen={false} onChange={onChange} onOk={onOk} />
           </div>
         </Col>
-        <Col span={10}>
-          <h3 style={{ marginLeft: "100px" }}>JADWAL WAWANCARA</h3>
+        <Col span={8} >
+          <h3 >JADWAL WAWANCARA</h3>
           <ul
             className="ant-timeline ant-timeline-label"
             style={{ marginLeft: "-300px", marginTop: "50px" }}
@@ -35,8 +35,8 @@ function schedule() {
                 style={{ borderColor: "orange" }}
               ></div>
               <div className={styles.anttimelineitemcontentorg}>
-                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
-                Muh. Angga Saputra We..
+                Interviewer: Farah Haisan, Teddy Purba Nasabah:
+                Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-left">
@@ -59,8 +59,8 @@ function schedule() {
                 style={{ borderColor: " #4399fad8" }}
               ></div>
               <div className={styles.anttimelineitemcontentblue}>
-                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
-                Muh. Angga Saputra We..
+                Interviewer: Farah Haisan, Teddy Purba Nasabah:
+                Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-last ant-timeline-item-left">
@@ -74,13 +74,13 @@ function schedule() {
                 className="ant-timeline-item-content"
                 style={{ height: "50px" }}
               >
-                Interviewer: Farah Haisan, Teddy Purba, Dinda Vanya Nasabah:
-                Muh. Angga Saputra We..
+                Interviewer: Farah Haisan, Teddy Purba Nasabah:
+                Angga Saputra We..
               </div>
             </li>
           </ul>
         </Col>
-        <Col style={{ marginLeft: "50px" }}>
+        <Col span={8} style={{paddingLeft:"60px"}}>
           <div
             style={{
               background: "#4399fad8",
@@ -111,7 +111,6 @@ function schedule() {
             }}
           />
           <p style={{ marginLeft: "30px" }}>Interview selesai</p>
-
           <div
             style={{
               background: "red",

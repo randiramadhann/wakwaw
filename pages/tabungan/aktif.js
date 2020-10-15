@@ -5,9 +5,10 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 import Head from "next/head";
+import cookies from 'nookies'
+import axios from 'axios'
 
 import styles from "../../styles/Layout.module.css";
-
 import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
@@ -16,8 +17,8 @@ const { Content } = Layout;
 const columns = [
   {
     title: "Nama Nasabah",
-    dataIndex: ["data_nasabah", "nama_nasabah"],
-    // render: (record) => record.form.name,
+    dataIndex: "account_name",
+    // render: (record) => record.account_name,
   },
   {
     title: "Nomor Rekening",
@@ -34,17 +35,17 @@ const columns = [
   },
   {
     title: "Target",
-    dataIndex: ["data_kpr", "target"],
+    dataIndex: "saving_plan_target",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
-    dataIndex: ["data_kpr", "setoran"],
+    dataIndex: "saving_pla_deposit",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
-    dataIndex: ["data_kpr", "terkumpul"],
+    dataIndex: "saving_plan_nominal",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
@@ -52,10 +53,10 @@ const columns = [
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <Link href={`/tabungan/${record._id}/detail`}>
+        <Link href={`/tabungan/${record.id}/detail`}>
           <a>Detail</a>
         </Link>
-        <Link href={`/tabungan/${record._id}/edit`}>
+        <Link href={`/tabungan/${record.id}/edit`}>
           <Button
             type="primary"
             shape="circle"
@@ -73,11 +74,12 @@ const columns = [
   },
 ];
 
-function aktif({ items }) {
+function aktif({items}) {
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
-
+  console.log(dataSource)
+  
   // rowSelection object indicates the need for row selection
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -127,10 +129,10 @@ function aktif({ items }) {
                   const filteredData = items.filter((entry) => {
                     return (
                       //search filter multiple input with OR operator
-                      entry.data_nasabah.nama_nasabah
+                      entry.account_name
                         .toLowerCase()
                         .includes(currValue) ||
-                      entry.data_nasabah.no_rek
+                      entry.account_number
                         .toLowerCase()
                         .includes(currValue)
                     );
@@ -147,9 +149,9 @@ function aktif({ items }) {
               rowSelection={rowSelection}
               columns={columns}
               dataSource={dataSource}
-              rowKey={(row) => row._id}
-            />
-          </div>
+              rowKey={(row) => row.id}
+            /> 
+         </div> 
         </Content>
       </Layout>
     </Layout>
@@ -157,23 +159,18 @@ function aktif({ items }) {
   );
 }
 
-aktif.getInitialProps = async () => {
-  // GET request using fetch with async/await
-  const requestOptions = {
-    method: "GET",
+aktif.getInitialProps = async context => {
+  //ambil token dari cookiesnya dulu
+  const { token } = cookies.get(context);
+  //await get pakai axios di return dalam bentuk items
+  const response =await axios.get('http://157.245.62.77:8080/api/dashboard/savings', {
     headers: {
-      "cache-control": "no-cache",
-      "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
-    },
-  };
-  const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/aktif`,
-    requestOptions
-  );
-  const items = await data.json();
-  return {
-    items,
-  };
+      "Authorization" : 'Bearer ' + token
+    }})
+    console.log("the response:", response.data)
+    return{
+      items: response.data.data
+    }
 };
 
 export default aktif;

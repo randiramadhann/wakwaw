@@ -147,7 +147,7 @@ function edit({ items }) {
                   </Form.Item>
                   <Form.Item name="status" label="Status KPR" labelAlign="left">
                     <Radio.Group
-                    name="status"
+                    name="status_kpr"
                       onChange={handleChange}
                       defaultValue={form.status_kpr}
                     >

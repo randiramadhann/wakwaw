@@ -12,6 +12,7 @@ import {
   SettingOutlined,
   ImportOutlined,
 } from "@ant-design/icons";
+import cookies from 'nookies';
 
 import styles from "../../styles/Layout.module.css";
 
@@ -19,6 +20,11 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function sidebar({ router }) {
+
+  const handleLogout=()=>{
+    cookies.destroy(null,'token');
+  }
+
   return (
     <Sider
       breakpoint="lg"
@@ -113,7 +119,9 @@ function sidebar({ router }) {
           </Link>
         </Menu.Item>
         <Menu.Item key="14" icon={<ImportOutlined />}>
-          Keluar
+          <Link href="/login">
+          <a onClick={handleLogout}>Keluar</a>
+          </Link>
         </Menu.Item>
       </Menu>
     </Sider>
