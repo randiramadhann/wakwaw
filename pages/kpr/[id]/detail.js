@@ -78,11 +78,13 @@ function detail({ items }) {
                 <Row>
                   <Col style={{ marginRight: "75px" }}>
                     <p>Status KPR</p>
-                    <p>Jadwal Wawancara</p>
+                    <p>Tanggal Wawancara</p>
+                    <p>Waktu Wawancara</p>
                     <p>Pewawancara</p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
                     <p>{dataKpr.data_kpr.status_kpr}</p>
+                    <p>{dataKpr.data_kpr.jadwal_wawancara}</p>
                     <p>{dataKpr.data_kpr.jadwal_wawancara}</p>
                     <p>{dataKpr.data_kpr.pewawancara}</p>
                   </Col>

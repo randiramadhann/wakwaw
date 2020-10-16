@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Layout, Tabs, Button, Form, Input, Radio, Space } from "antd";
+import { Layout, Tabs, Button, Form, Input, Radio, Space,Modal  } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Head from "next/head";
 import { useRouter } from 'next/router';
@@ -10,6 +11,7 @@ import Navbar from "../../../components/layout/Navbar";
 
 const { Content } = Layout;
 const { TabPane } = Tabs;
+const { confirm } = Modal;
 
 function edit({ items }) {
   const [dataKpr, setDataKpr] = useState(items);
@@ -39,22 +41,50 @@ function edit({ items }) {
   //   console.log({data_kpr:form});
   // };
 
-  const onFinish = async () => {
-    try {
-        const res = await fetch(`https://zenia-f7c7.restdb.io/rest/kprzenia/${router.query.id}`, {
-            method: 'PUT',
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-              "cache-control": "no-cache",
-              "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
-            },
-            body: JSON.stringify({data_kpr:form})
-        })
-        router.reload();
-    } catch (error) {
-        console.log(error);
-    }
+//   const onFinish = async () => {
+//     try {
+//         const res = await fetch(`https://zenia-f7c7.restdb.io/rest/kprzenia/${router.query.id}`, {
+//             method: 'PUT',
+//             headers: {
+//               "Accept": "application/json",
+//               "Content-Type": "application/json",
+//               "cache-control": "no-cache",
+//               "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+//             },
+//             body: JSON.stringify({data_kpr:form})
+//         })
+//         router.reload();
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+ //handle delete confirmation
+ function onFinish() {
+  confirm({
+    title: "Apakah anda yakin akan melakukan perubahan dokumen?",
+    icon: <ExclamationCircleOutlined />,
+    onOk: async () => {
+      try {
+          const res = await fetch(`https://zenia-f7c7.restdb.io/rest/kprzenia/${router.query.id}`, {
+              method: 'PUT',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "cache-control": "no-cache",
+                "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+              },
+              body: JSON.stringify({data_kpr:form})
+          })
+          router.reload();
+      } catch (error) {
+          console.log(error);
+      }
+  },
+    onCancel() {
+      console.log("Cancel");
+    },
+  });
 }
 
   const layout = {
@@ -154,6 +184,7 @@ function edit({ items }) {
                       <Radio value="pengajuan">Pengajuan</Radio>
                       <Radio value="aktif">Aktif</Radio>
                       <Radio value="ditolak">Ditolak</Radio>
+                      <Radio value="dihentikan">Dihentikan</Radio>
                       <Radio value="selesai">Selesai</Radio>
                     </Radio.Group>
                   </Form.Item>
@@ -217,6 +248,7 @@ function edit({ items }) {
                         Batal
                       </Button>
                       <Button
+                      
                         htmlType="submit"
                         type="primary"
                         style={{
@@ -395,7 +427,7 @@ function edit({ items }) {
                   </Form.Item>
                   <Form.Item
                     name="no_penjamin"
-                    label="Nomor Telp Penjamin"
+                    label="Nomor Telephone Penjamin"
                     labelAlign="left"
                     initialValue={dataKpr.kontak.no_penjamin}
                   >
@@ -542,6 +574,14 @@ function edit({ items }) {
                     <Input />
                   </Form.Item>
                   <Form.Item
+                    name="estimasi"
+                    label="Estimasi Harga"
+                    labelAlign="left"
+                    initialValue=""
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
                     name="penjual"
                     label="Pihak Penjual"
                     labelAlign="left"
@@ -622,6 +662,34 @@ function edit({ items }) {
                     labelAlign="left"
                   >
                     <a>{dataKpr.dokumen.file_koran}</a>
+                  </Form.Item>
+                  <Form.Item
+                    name="slip_gaji"
+                    label="File Slip Gaji"
+                    labelAlign="left"
+                  >
+                    <a>slipgaji.pdf</a>
+                  </Form.Item>
+                  <Form.Item
+                    name="file_npwp"
+                    label="File NPWP"
+                    labelAlign="left"
+                  >
+                    <a>NPWP.pdf</a>
+                  </Form.Item>
+                  <Form.Item
+                    name="file_siup"
+                    label="File SIUP"
+                    labelAlign="left"
+                  >
+                    <a>siup.pdf</a>
+                  </Form.Item>
+                  <Form.Item
+                    name="file_akta"
+                    label="File Akta Nikah"
+                    labelAlign="left"
+                  >
+                    <a>akta.pdf</a>
                   </Form.Item>
                   <Form.Item>
                     <Space size="middle">

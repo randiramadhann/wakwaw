@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined,ExclamationCircleOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 import Head from "next/head";
+import cookies from 'nookies'
+import axios from 'axios'
 
 import styles from "../../styles/Layout.module.css";
 
@@ -12,20 +14,21 @@ import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
 const { Content } = Layout;
+const { confirm } = Modal;
 
 const columns = [
   {
     title: "Nama Nasabah",
-    dataIndex: ["data_nasabah", "nama_nasabah"],
+    dataIndex: "name",
     // render: (record) => record.form.name,
   },
   {
     title: "Nomor Rekening",
-    dataIndex: ["data_nasabah", "no_rek"],
+    dataIndex: "rekeningNumber",
   },
   {
     title: "Status",
-    dataIndex: ["data_kpr", "status_kpr"],
+    dataIndex: "kprSubStatus",
     render: (value) => (
       <Tag style={{ borderRadius: "20px" }} color="#F2994A">
         {value}
@@ -34,28 +37,28 @@ const columns = [
   },
   {
     title: "Target",
-    dataIndex: ["data_kpr", "target"],
+    dataIndex: "savingTarget",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
-    dataIndex: ["data_kpr", "setoran"],
+    dataIndex: "installmentDeposit",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
-    dataIndex: ["data_kpr", "terkumpul"],
+    dataIndex: "totalDeposit",
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
-    title: "",
+    title: "Aksi",
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <Link href={`/kpr/${record._id}/detail`}>
+        <Link href={`/kpr/${record.id}/detail`}>
           <a>Detail</a>
         </Link>
-        <Link href={`/kpr/${record._id}/edit`}>
+        <Link href={`/kpr/${record.id}/edit`}>
           <Button
             type="primary"
             shape="circle"
@@ -73,10 +76,42 @@ const columns = [
   },
 ];
 
-function pengajuan({ items }) {
+function pengajuan({ items}) {
+  console.log("MBA AYU :", items)
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
+
+  //handle delete confirmation
+  function showConfirm() {
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleOutlined />,
+      onOk: async () => {
+        const noteId = selectedRowKeys;
+        // DELETE request using fetch with async/await
+        const requestOptions = {
+          method: "DELETE",
+          headers: {
+            "cache-control": "no-cache",
+            "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+          },
+        };
+        try {
+          const deleted = await fetch(
+            `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+            requestOptions
+          );
+          Router.reload();
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  }
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
@@ -110,6 +145,17 @@ function pengajuan({ items }) {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
+             <Button
+              type="primary"
+              shape="circle"
+              icon={<DeleteOutlined />}
+              size="middle"
+              onClick={showConfirm}
+              style={{
+                background: "#EB5757",
+                borderColor: "#EB5757",
+              }}
+            />
             <div
               style={{
                 marginBottom: "16px",
@@ -119,7 +165,7 @@ function pengajuan({ items }) {
               }}
             >
               <Input
-                placeholder="Search"
+                placeholder="Cari"
                 value={value}
                 onChange={(e) => {
                   const currValue = e.target.value;
@@ -147,7 +193,7 @@ function pengajuan({ items }) {
               rowSelection={rowSelection}
               columns={columns}
               dataSource={dataSource}
-              rowKey={(row) => row._id}
+              rowKey={(row) => row.id}
             />
           </div>
         </Content>
@@ -157,23 +203,18 @@ function pengajuan({ items }) {
   );
 }
 
-pengajuan.getInitialProps = async () => {
-  // GET request using fetch with async/await
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "cache-control": "no-cache",
-      "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
-    },
-  };
-  const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/kprzenia?q={"data_kpr":{"status_kpr":"pengajuan"}}`,
-    requestOptions
-  );
-  const items = await data.json();
-  return {
-    items,
-  };
+pengajuan.getInitialProps = async context => {
+   //ambil token dari cookiesnya dulu
+   const { token } = cookies.get(context);
+   //await get pakai axios di return dalam bentuk items
+   const response = await axios.get('http://157.245.62.77:8080/api/kpr/list-kpr/pengajuan', {
+     headers: {
+       "Authorization" : 'Bearer ' + token
+     }})
+     console.log("the response:", response)
+     return{
+       items: response.data.data
+     }
 };
 
 export default pengajuan;

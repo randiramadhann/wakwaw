@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, PlusOutlined  } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 
@@ -82,12 +82,22 @@ function pengajuan({ items }) {
               fontWeight: "bold",
             }}
           >
-            DATA NASABAH
+            DATA ADMIN
           </div>
           <div
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
+             <Button
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined />}
+              size="middle"
+              style={{
+                background: "#3BA1FF",
+                borderColor: "#3BA1FF",
+              }}
+            />
             <div
               style={{
                 marginBottom: "16px",
@@ -96,6 +106,7 @@ function pengajuan({ items }) {
                 zIndex: "10",
               }}
             >
+              
               <Input
                 placeholder="Search"
                 value={value}

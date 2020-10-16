@@ -48,7 +48,7 @@ const columns = [
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
-    title: "",
+    title: "Aksi",
     key: "action",
     render: (text, record) => (
       <Space size="middle">
@@ -119,7 +119,7 @@ function aktif({ items }) {
               }}
             >
               <Input
-                placeholder="Search"
+                placeholder="Cari"
                 value={value}
                 onChange={(e) => {
                   const currValue = e.target.value;
