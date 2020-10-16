@@ -22,26 +22,26 @@ function schedule() {
           </div>
         </Col>
         <Col span={8} >
-          <h3 >JADWAL WAWANCARA</h3>
+          <h3 style={{fontFamily: "sans-serif", fontWeight: "bold"}}>JADWAL WAWANCARA</h3>
           <ul
             className="ant-timeline ant-timeline-label"
             style={{ marginLeft: "-300px", marginTop: "50px" }}
           >
             <li className="ant-timeline-item ant-timeline-item-left">
-              <div className="ant-timeline-item-label">10.00</div>
+              <div className="ant-timeline-item-label" style={{fontFamily: "sans-serif"}}>10.00</div>
               <div className="ant-timeline-item-tail"></div>
               <div
                 className="ant-timeline-item-head ant-timeline-item-head-blue"
                 style={{ borderColor: "orange" }}
               ></div>
-              <div className={styles.anttimelineitemcontentorg}>
+              <div className={styles.anttimelineitemcontentorg} style={{fontFamily: "sans-serif"}}>
                 Interviewer: Farah Haisan, Teddy Purba Nasabah:
                 Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-left">
-              <div className="ant-timeline-item-label">11.00</div>
-              <div className="ant-timeline-item-tail"></div>
+              <div className="ant-timeline-item-label" style={{fontFamily: "sans-serif"}}>11.00</div>
+              <div className="ant-timeline-item-tail" style={{fontFamily: "sans-serif"}}></div>
               <div
                 className="ant-timeline-item-head ant-timeline-item-head-blue"
                 style={{ borderColor: "grey" }}
@@ -52,19 +52,19 @@ function schedule() {
               ></div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-left">
-              <div className="ant-timeline-item-label">12.00</div>
+              <div className="ant-timeline-item-label" style={{fontFamily: "sans-serif"}}>12.00</div>
               <div className="ant-timeline-item-tail"></div>
               <div
                 className="ant-timeline-item-head ant-timeline-item-head-blue"
                 style={{ borderColor: " #4399fad8" }}
               ></div>
-              <div className={styles.anttimelineitemcontentblue}>
+              <div className={styles.anttimelineitemcontentblue} style={{fontFamily: "sans-serif"}}>
                 Interviewer: Farah Haisan, Teddy Purba Nasabah:
                 Angga Saputra We..
               </div>
             </li>
             <li className="ant-timeline-item ant-timeline-item-last ant-timeline-item-left">
-              <div className="ant-timeline-item-label">13.00</div>
+              <div className="ant-timeline-item-label" style={{fontFamily: "sans-serif"}}>13.00</div>
               <div className="ant-timeline-item-tail"></div>
               <div
                 className="ant-timeline-item-head ant-timeline-item-head-blue"
@@ -73,6 +73,7 @@ function schedule() {
               <div
                 className="ant-timeline-item-content"
                 style={{ height: "50px" }}
+                style={{fontFamily: "sans-serif"}}
               >
                 Interviewer: Farah Haisan, Teddy Purba Nasabah:
                 Angga Saputra We..
@@ -90,7 +91,7 @@ function schedule() {
               marginTop: "50px",
             }}
           />
-          <p style={{ marginLeft: "30px", marginTop: "50px" }}>
+          <p style={{ marginLeft: "30px", marginTop: "50px",  fontFamily: "sans-serif" }}>
             Interview yang akan datang
           </p>
           <div
@@ -101,7 +102,7 @@ function schedule() {
               width: "25px",
             }}
           />
-          <p style={{ marginLeft: "30px" }}>Menunggu Konfirmasi Nasabah</p>
+          <p style={{ marginLeft: "30px", fontFamily: "sans-serif" }}>Menunggu Konfirmasi Nasabah</p>
           <div
             style={{
               background: "grey",
@@ -110,7 +111,7 @@ function schedule() {
               width: "25px",
             }}
           />
-          <p style={{ marginLeft: "30px" }}>Interview selesai</p>
+          <p style={{ marginLeft: "30px", fontFamily: "sans-serif" }}>Interview selesai</p>
           <div
             style={{
               background: "red",
@@ -119,7 +120,7 @@ function schedule() {
               width: "25px",
             }}
           />
-          <p style={{ marginLeft: "30px" }}>Interview batal</p>
+          <p style={{ marginLeft: "30px", fontFamily: "sans-serif" }}>Interview batal</p>
         </Col>
       </Row>
     </div>

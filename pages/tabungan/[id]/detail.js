@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Tabs, Button, Divider, Row, Col, Modal } from "antd";
 import fetch from "isomorphic-fetch";
+import Head from "next/head";
 
 import styles from "../../../styles/Layout.module.css";
 import Sidebar from "../../../components/layout/Sidebar";
@@ -30,6 +31,11 @@ function detail({ items }) {
   };
 
   return (
+    <>
+    <Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -54,14 +60,13 @@ function detail({ items }) {
                     <p>Rp {dataKpr.data_kpr.setoran}</p>
                     <p>Rp {dataKpr.data_kpr.terkumpul}</p>
                     <p>{dataKpr.data_kpr.metode}</p>
-                    <p>{dataKpr.data_kpr.metode}</p>
                   </Col>
                 </Row>
                 <Divider />
                 <Row>
                   <Col style={{ marginRight: "105px" }}>
-                    <p>Judul tabungan</p>
-                    <p>Tanggal dibuat</p>
+                    <p>Judul Tabungan</p>
+                    <p>Tanggal Dibuat</p>
                     <p>Tanggal Selesai</p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
@@ -70,9 +75,9 @@ function detail({ items }) {
                     <p>{dataKpr.data_kpr.tgl_selesai}</p>
                   </Col>
                 </Row>
-                <Divider/>
+                <Divider />
                 <Row>
-                  <Col style={{ marginRight: "90px"}}>
+                  <Col style={{ marginRight: "98px" }}>
                     <p>Status Tabungan</p>
                   </Col>
                   <Col style={{ fontWeight: "bold" }}>
@@ -80,14 +85,15 @@ function detail({ items }) {
                   </Col>
                 </Row>
                 <Divider/>
-                <Row style={{ marginBottom: "20px" }}>
-                  <Col  style={{ marginRight: "118px" }}>
+                <Row>
+                  <Col style={{ marginRight: "128px" }}>
                     <p>Foto Rumah</p>
                   </Col>
-                  <Col style={{ fontWeight: "bold" }}>
+                  <Col>
                     <a onClick={showModal}>rumah.jpeg</a>
                   </Col>
-                  <Modal
+                </Row>
+                <Modal
                   title="Foto Rumah"
                   visible={visible}
                   onOk={handleOk}
@@ -95,7 +101,6 @@ function detail({ items }) {
                 >
                   <img src={dataKpr.rumah_kpr.foto_rumah} width="300px" />
                 </Modal>
-                </Row>
                 <Button
                   href={`/tabungan/${items._id}/edit`}
                   type="primary"
@@ -113,6 +118,7 @@ function detail({ items }) {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 
@@ -126,7 +132,7 @@ detail.getInitialProps = async ({ query: { id } }) => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan/${id}`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia/${id}`,
     requestOptions
   );
   const items = await data.json();

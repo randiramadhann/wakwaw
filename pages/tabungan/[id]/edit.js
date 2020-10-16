@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Layout, Tabs, Button, Form, Input, Radio, Space, Divider, Row, Col, Modal } from "antd";
+import { Layout, Tabs, Button, Form, Input, Radio, Space, Modal, Row, Col } from "antd";
 import fetch from "isomorphic-fetch";
+import Head from "next/head";
+import { useRouter } from 'next/router';
 
 import styles from "../../../styles/Layout.module.css";
 import Sidebar from "../../../components/layout/Sidebar";
@@ -11,13 +13,13 @@ const { TabPane } = Tabs;
 
 function edit({ items }) {
   const [dataKpr, setDataKpr] = useState(items);
-  const [visible, setVisible] = useState(false);
   const [value, setValue] = useState();
+  const [form, setForm] = useState({target:items.data_kpr.target, setoran:items.data_kpr.setoran,terkumpul:items.data_kpr.terkumpul,metode:items.data_kpr.metode,tgl_pengajuan:items.data_kpr.tgl_pengajuan,tgl_approval:items.data_kpr.tgl_approval,tgl_selesai:items.data_kpr.tgl_selesai,status_kpr:items.data_kpr.status_kpr,tanggal_wawancara:items.data_kpr.tanggal_wawancara,waktu_wawancara:items.data_kpr.waktu_wawancara,tanggal_penyerahan:items.data_kpr.tanggal_penyerahan,waktu_penyerahan:items.data_kpr.waktu_penyerahan,pewawancara:items.data_kpr.pewawancara});
+  const router = useRouter();
+  const [visible, setVisible] = useState(false);
 
-  console.log(dataKpr);
-
-   //handle modal
-   const showModal = () => {
+  //handle modal
+  const showModal = () => {
     setVisible(true);
   };
 
@@ -31,7 +33,8 @@ function edit({ items }) {
     setVisible(false);
   };
 
-  
+  // console.log(dataKpr);
+
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue({
@@ -39,9 +42,37 @@ function edit({ items }) {
     });
   };
 
-  const onFinish = (values) => {
-    console.log("Form:", values);
-  };
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+}
+
+  // const onFinish = (values) => {
+  //   // console.log("Form:", values);
+  //   // setForm(values)
+  //   console.log({data_kpr:form});
+  // };
+
+  const onFinish = async () => {
+    try {
+        const res = await fetch(`https://zenia-f7c7.restdb.io/rest/kprzenia/${router.query.id}`, {
+            method: 'PUT',
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "cache-control": "no-cache",
+              "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+            },
+            body: JSON.stringify({data_kpr:form})
+        })
+        router.reload();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
   const layout = {
     labelCol: {
       span: 6,
@@ -51,6 +82,12 @@ function edit({ items }) {
     },
   };
   return (
+    <>
+    <Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
+
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -72,73 +109,74 @@ function edit({ items }) {
                     name="target"
                     label="Target"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.target}
+                    initialValue={form.target}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input name="target" onChange={handleChange} />
                   </Form.Item>
                   <Form.Item
                     name="setoran"
                     label="Setoran"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.setoran}
+                    initialValue={form.setoran}
                   >
-                    <Input style={{fontWeight: "bold"}} />
+                    <Input name="setoran" onChange={handleChange}  />
                   </Form.Item>
                   <Form.Item
                     name="terkumpul"
                     label="Terkumpul"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.terkumpul}
+                    initialValue={form.terkumpul}
                   >
-                     <Input style={{fontWeight: "bold"}}/>
+                    <Input name="terkumpul" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item
                     name="frekuensi_setoran"
                     label="Frekuensi Setoran"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.metode}
+                    initialValue={form.metode}
                   >
-                    <Input style={{fontWeight: "bold"}} />
+                    <Input />
                   </Form.Item>
                   <Form.Item
                     name="metode_setoran"
                     label="Metode Setoran"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.metode}
+                    initialValue={form.metode}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input />
                   </Form.Item>
                   <Form.Item
                     name="judul_tabungan"
                     label="Judul Tabungan"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_pengajuan}
+                    initialValue={form.metode}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input />
                   </Form.Item>
                   <Form.Item
-                    name="tanggal_dibuat"
-                    label="Tanggal Dibuat"
+                    name="tgl_dibuat"
+                    label="Tanggal dibuat"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_approval}
+                    initialValue={form.tgl_approval}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input type="date" name="tgl_approve" onChange={handleChange} />
                   </Form.Item>
                   <Form.Item
-                    name="tanggal_selesai"
+                    name="tgl_selesai"
                     label="Tanggal Selesai"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.tgl_selesai}
+                    initialValue={form.tgl_selesai}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input type="date" name="tgl_target" onChange={handleChange}/>
                   </Form.Item>
                   <Form.Item name="status" label="Status Tabungan" labelAlign="left">
                     <Radio.Group
-                      onChange={onChange}
-                      defaultValue={dataKpr.data_kpr.status_kpr}
+                    name="status_kpr"
+                      onChange={handleChange}
+                      defaultValue={form.status_kpr}
                     >
                       <Radio value="pengajuan">Dihentikan</Radio>
-                      <Radio value="aktif">Tunda</Radio>
+                      <Radio value="aktif">Ditunda</Radio>
                       <Radio value="ditolak">Aktif</Radio>
                       <Radio value="selesai">Selesai</Radio>
                     </Radio.Group>
@@ -147,48 +185,42 @@ function edit({ items }) {
                     name="pewawancara"
                     label="Pewawancara"
                     labelAlign="left"
-                    initialValue={dataKpr.data_kpr.jadwal_wawancara}
+                    initialValue={form.waktu_wawancara}
                   >
-                    <Input style={{fontWeight: "bold"}}/>
+                    <Input />
                   </Form.Item>
-                  <Divider/>
-                  <Row style={{ marginBottom: "20px" }}>
-                  <Col  style={{ marginRight: "118px" }}>
-                    <p>Foto Rumah</p>
-                  </Col>
-                  <Col style={{ fontWeight: "bold" }}>
-                    <a onClick={showModal}>rumah.jpeg</a>
-                  </Col>
-                  <Modal
-                  title="Foto Rumah"
-                  visible={visible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <img src={dataKpr.rumah_kpr.foto_rumah} width="300px" />
-                </Modal>
-                </Row>
                   <Form.Item>
                     <Space size="middle">
                       <Button
-                        href={`/tabungan/${dataKpr._id}/detail`}
+                        href={`/kpr/${dataKpr._id}/detail`}
                         style={{
                           width: "80px",
                           marginTop: "30px",
                         }}
                       >
-                        <p style={{ color: "#000000", fontWeight: "bold" }}>Batal</p>
+                        Batal
                       </Button>
                       <Button
+                        htmlType="submit"
+                        type="primary"
                         style={{
                           width: "80px",
                           background: "#3BA1FF",
                           borderColor: "#3BA1FF",
                           marginTop: "30px",
                         }}
+                        onClick={showModal}
                       >
-                        <p style={{ color: "#FFFFFF", fontWeight: "bold" }} >Simpan</p>
+                        Simpan
                       </Button>
+                      <Modal
+                        title="Please Confirm"
+                        visible={visible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                      >
+                        <p>Apakah anda yakin melakukan perubahan dokumen</p>
+                      </Modal>
                     </Space>{" "}
                   </Form.Item>
                 </Form>
@@ -198,6 +230,7 @@ function edit({ items }) {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 
@@ -211,7 +244,7 @@ edit.getInitialProps = async ({ query: { id } }) => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan/${id}`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia/${id}`,
     requestOptions
   );
   const items = await data.json();

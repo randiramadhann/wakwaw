@@ -29,7 +29,7 @@ function dashboard() {
         <Content style={{ margin: "24px 16px 0" }}>
             <Card/>
             <Schedule  />
-             <div style={{width:"1096px"}}><Footer style={{ textAlign: 'center',background:"#fff",color:"#000" }}>&#169; 2020 Zenia Indonesia Dashboard</Footer></div>
+             <div style={{width:"1096px"}}><Footer style={{ textAlign: 'center',background:"#fff",color:"#000", fontFamily: "sans-serif" }}>&#169; 2020 Zenia Indonesia Dashboard</Footer></div>
         </Content>
         
       </Layout>

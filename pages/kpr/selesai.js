@@ -130,7 +130,7 @@ function selesai({ items }) {
         };
         try {
           const deleted = await fetch(
-            `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+            `https://zenia-f7c7.restdb.io/rest/kprzenia/${noteId}`,
             requestOptions
           );
           Router.reload();

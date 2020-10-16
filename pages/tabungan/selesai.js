@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 import Head from "next/head";
@@ -12,6 +16,7 @@ import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
 const { Content } = Layout;
+const { confirm } = Modal;
 
 const columns = [
   {
@@ -26,11 +31,41 @@ const columns = [
   {
     title: "Status",
     dataIndex: ["data_kpr", "status_kpr"],
-    render: (value) => (
-      <Tag style={{ borderRadius: "20px" }} color="#F2994A">
-        {value}
-      </Tag>
-    ),
+    render: (value)=>{
+      let color = "geekblue";
+      if(value==="selesai"){
+        color="##219653";
+      }
+      if(value==="ditolak"){
+        color="#BDBDBD"
+      }
+      return (
+          <Tag color={color} key={value} style={{ borderRadius: "20px" }}>
+               {value}
+          </Tag>
+           );
+    },
+    // // render: (tags) => (
+    // //   <>
+    // //     {tags.map((tag) => {
+    // //       let color = tag.length > 5 ? "geekblue" : "green";
+    // //       if (tag === "selesai") {
+    // //         color = "#219653";
+    // //       }
+    // //       if (tag === "ditolak") {
+    // //         color = "#BDBDBD";
+    // //       }
+    // //       if (tag === "berhenti") {
+    // //         color = "#EB5757";
+    // //       }
+    // //       return (
+    // //         <Tag color={color} key={tag} style={{ borderRadius: "20px" }}>
+    // //           {tag}
+    // //         </Tag>
+    // //       );
+    // //     })}
+    // //   </>
+    // ),
   },
   {
     title: "Target",
@@ -73,10 +108,41 @@ const columns = [
   },
 ];
 
-function pengajuan({ items }) {
+function selesai({ items }) {
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");
+
+  //handle delete confirmation
+  function showConfirm() {
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleOutlined />,
+      onOk: async () => {
+        const noteId = selectedRowKeys;
+        // DELETE request using fetch with async/await
+        const requestOptions = {
+          method: "DELETE",
+          headers: {
+            "cache-control": "no-cache",
+            "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+          },
+        };
+        try {
+          const deleted = await fetch(
+            `https://zenia-f7c7.restdb.io/rest/kprzenia/${noteId}`,
+            requestOptions
+          );
+          Router.reload();
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  }
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
@@ -89,9 +155,9 @@ function pengajuan({ items }) {
   return (
     <>
     <Head>
-        <title>ZENIA ADMIN</title>
-        <link rel="icon" href="/logo.png" />
-      </Head>
+      <title>ZENIA ADMIN</title>
+      <link rel="icon" href="/logo.png" />
+    </Head>
     <Layout style={{ height: "100vh" }}>
       <Navbar />
       <Layout>
@@ -104,12 +170,23 @@ function pengajuan({ items }) {
               fontWeight: "bold",
             }}
           >
-            TABUNGAN SELESAI
+            KPR AKTIF
           </div>
           <div
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
+            <Button
+              type="primary"
+              shape="circle"
+              icon={<DeleteOutlined />}
+              size="middle"
+              onClick={showConfirm}
+              style={{
+                background: "#EB5757",
+                borderColor: "#EB5757",
+              }}
+            />
             <div
               style={{
                 marginBottom: "16px",
@@ -129,10 +206,10 @@ function pengajuan({ items }) {
                       //search filter multiple input with OR operator
                       entry.data_nasabah.nama_nasabah
                         .toLowerCase()
-                        .includes(currValue) ||
+                        .includes(currValue.toLowerCase()) ||
                       entry.data_nasabah.no_rek
                         .toLowerCase()
-                        .includes(currValue)
+                        .includes(currValue.toLowerCase())
                     );
                   });
                   setDataSource(filteredData);
@@ -157,7 +234,7 @@ function pengajuan({ items }) {
   );
 }
 
-pengajuan.getInitialProps = async () => {
+selesai.getInitialProps = async () => {
   // GET request using fetch with async/await
   const requestOptions = {
     method: "GET",
@@ -167,7 +244,7 @@ pengajuan.getInitialProps = async () => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia?q={"$or":[{"data_kpr":{"status_kpr":"ditolak"}},{"data_kpr":{"status_kpr":"selesai"}}]}`,
     requestOptions
   );
   const items = await data.json();
@@ -176,4 +253,4 @@ pengajuan.getInitialProps = async () => {
   };
 };
 
-export default pengajuan;
+export default selesai;

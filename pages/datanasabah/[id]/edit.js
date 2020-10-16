@@ -13,6 +13,7 @@ function edit({ items }) {
   const [dataKpr, setDataKpr] = useState(items);
   const [value, setValue] = useState();
   const [visible, setVisible] = useState(false);
+  const[modalOpen, setModalOpen] = useState(false);
 
   console.log(dataKpr);
 
@@ -191,10 +192,11 @@ function edit({ items }) {
                     <a onClick={showModal}>rumah.jpeg</a>
                   </Col>
                   <Modal
+                  id="1"
                   title="Foto Rumah"
                   visible={visible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
+                  onUbah={handleOk}
+                  onBatal={handleCancel}
                 >
                   <img src={dataKpr.rumah_kpr.foto_rumah} width="300px" />
                 </Modal>
@@ -219,9 +221,19 @@ function edit({ items }) {
                           borderColor: "#3BA1FF",
                           marginTop: "30px",
                         }}
+                        onClick={showModal}
                       >
                         Simpan
                       </Button>
+                      <Modal
+                        id="2"
+                        title="Please Confirm"
+                        visible={visible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                      >
+                        <p>Apakah anda yakin melakukan perubahan dokumen</p>
+                      </Modal>
                     </Space>
                   </Form.Item>
                 </Form>

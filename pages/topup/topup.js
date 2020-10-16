@@ -136,12 +136,12 @@ function edit({ items }) {
                       >
                         <p>Apakah anda yakin melakukan pengisian <span style={{fontWeight: "bold"}}>Saldo Rekening</span></p>
                         <Row>
-                          <Col>
+                          <Col style={{marginRight: 20}}>
                             <p>Nasabah</p>
                             <p>No Rekening</p>
                             <p>Jumlah</p>
                           </Col>
-                          <Col>
+                          <Col >
                             <p>Nasabah</p>
                             <p>No Rekening</p>
                             <p>Jumlah</p>

@@ -13,6 +13,7 @@ function navbar() {
     >
       <div className={styles.logo}>
         <img src="/img/logo-zenia.png" width="100px" />
+        <p style={{float: "right", marginRight: 27, fontFamily: "sans-serif", fontWeight: "bold"}}>Hello, Admin</p>
       </div>
     </Header>
   );
