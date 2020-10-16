@@ -1,11 +1,10 @@
 .logo {
-  height: 32px;
-  /* background: rgba(255, 255, 255, 0.2); */
-  margin: 16px;
+  margin-left: 25px;
 }
 
 .sitelayoutsubheaderbackground {
   background: #fff;
+  box-shadow: 0px 8px 8px -6px #001c72;
 }
 
 .sitelayoutbackground {
@@ -18,4 +17,97 @@
 }
 .sitelayoutsub {
   background: #001c72;
+}
+.anttimelineitemcontentorg {
+  background: #ffe9bdd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #f5b22d;
+}
+
+.anttimelineitemcontentblue {
+  background: #bddcffd8;
+  height: 50px;
+  padding: 4px;
+  position: relative;
+  top: -7.001px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  left: calc(50% - 4px);
+  width: calc(50% - 14px);
+  text-align: left;
+  border-left: 8px solid #4399fad8;
+}
+
+.antd-spin-container
+  ul.ant-table-pagination-right
+  li.ant-pagination-total-text {
+  margin-top: -1630px;
+  margin-left: -900px;
+  z-index: 1000;
+}
+
+.sitecalendardemocard {
+  width: 300px;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+}
+
+.card {
+  position: relative;
+  width: 259px;
+  height: 112px;
+  background: #7ecfa2;
+}
+
+.card1 {
+  position: absolute;
+  top: 50;
+  left: 300;
+  width: 259px;
+  height: 48px;
+  background: #6fc997;
+}
+
+.columnCard {
+  margin-left: 20px;
+}
+
+.textCard {
+  position: absolute;
+  left: 20;
+  top: 10;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+.textCard1 {
+  text-align: left;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.chart {
+  width: 538px;
+  height: 320px;
+  background: #ffffff;
+}
+
+.ant-list-pagination ul.ant-pagination {
+  position: relative;
+  left: 1000;
 }

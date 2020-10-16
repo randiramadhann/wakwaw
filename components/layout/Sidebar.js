@@ -12,6 +12,7 @@ import {
   SettingOutlined,
   ImportOutlined,
 } from "@ant-design/icons";
+import cookies from 'nookies';
 
 import styles from "../../styles/Layout.module.css";
 
@@ -19,6 +20,11 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function sidebar({ router }) {
+
+  const handleLogout=()=>{
+    cookies.destroy(null,'token');
+  }
+
   return (
     <Sider
       breakpoint="lg"
@@ -31,91 +37,98 @@ function sidebar({ router }) {
       }}
       className={styles.sitelayoutsidebar}
     >
-      <div className={styles.logo}>
-        <img src="/img/logo-zenia.png" width="100px"></img>{" "}
-      </div>
       <Menu
         style={{
           background: "#001c72",
           color: "rgba(255, 255, 255, 0.65)",
           width: "201px",
+          marginTop: "20px",
         }}
         mode="inline"
         selectedKeys={[router.pathname]}
       >
         <Menu.Item key="/dashboard" icon={<DesktopOutlined />}>
           <Link href="/dashboard">
-            <a>Dashboard</a>
+            <a style={{fontFamily: "sans-serif"}}>Dashboard</a>
           </Link>
         </Menu.Item>
         <SubMenu key="sub1" icon={<BellOutlined />} title="Notifikasi">
           <Menu.Item key="/notifikasi/nasabah">
             <Link href="/notifikasi/nasabah">
-              <a>Nasabah</a>
+              <a style={{fontFamily: "sans-serif"}}>Nasabah</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="/notifikasi/tabungan">
             <Link href="/notifikasi/tabungan">
-              <a>Tabungan</a>
+              <a style={{fontFamily: "sans-serif"}}>Tabungan</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="/notifikasi/kpr">
             <Link href="/notifikasi/kpr">
-              <a>KPR</a>
+              <a style={{fontFamily: "sans-serif"}}>KPR</a>
             </Link>
           </Menu.Item>
         </SubMenu>
-        <Menu.Item key="/datanasabah" icon={<TeamOutlined />}>
-          <Link href="/datanasabah">
-            <a>Data Nasabah</a>
-          </Link>
-        </Menu.Item>
-        <SubMenu key="sub2" icon={<WalletOutlined />} title="Tabungan">
+        <SubMenu key="sub2" icon={<TeamOutlined />} title="Data Nasabah">
+          <Menu.Item key="/datanasabah/verifikasi">
+            <Link href="/datanasabah/verifikasi">
+              <a style={{fontFamily: "sans-serif"}}>Verifikasi</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/datanasabah/nonverifikasi">
+            <Link href="/datanasabah/nonverifikasi">
+              <a style={{fontFamily: "sans-serif"}}>Belum Diverifikasi</a>
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub3" icon={<WalletOutlined />} title="Tabungan">
           <Menu.Item key="/tabungan/aktif">
             <Link href="/tabungan/aktif">
-              <a>Aktif</a>
+              <a style={{fontFamily: "sans-serif"}}>Aktif</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="/tabungan/selesai">
             <Link href="/tabungan/selesai">
-              <a>Selesai</a>
+              <a style={{fontFamily: "sans-serif"}}>Selesai</a>
             </Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="sub3" icon={<HomeOutlined />} title="KPR">
-          <Menu.Item key="/kpr/wawancara">
-            <Link href="/kpr/wawancara">
-              <a>Wawancara</a>
-            </Link>
-          </Menu.Item>
+        <SubMenu key="sub4" icon={<HomeOutlined />} title="KPR">
           <Menu.Item key="/kpr/pengajuan">
             <Link href="/kpr/pengajuan">
-              <a>Pengajuan</a>
+              <a style={{fontFamily: "sans-serif"}}>Pengajuan</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="/kpr/aktif">
             <Link href="/kpr/aktif">
-              <a>Aktif</a>
+              <a style={{fontFamily: "sans-serif"}}>Aktif</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="/kpr/selesai">
             <Link href="/kpr/selesai">
-              <a>Selesai</a>
+              <a style={{fontFamily: "sans-serif"}}>Selesai</a>
             </Link>
           </Menu.Item>
         </SubMenu>
-        <Menu.Item key="/dataadmin" icon={<UserOutlined />}>
+        <Menu.Item key="/topup/topup" icon={<DesktopOutlined />}>
+          <Link href="/topup/topup">
+            <a style={{fontFamily: "sans-serif"}}>Top Up</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/dataadmin/" icon={<UserOutlined />}>
           <Link href="/dataadmin">
-            <a>Data Admin</a>
+            <a style={{fontFamily: "sans-serif"}}>Data Admin</a>
           </Link>
         </Menu.Item>
         <Menu.Item key="/pengaturan" icon={<SettingOutlined />}>
           <Link href="/pengaturan">
-            <a>Pengaturan</a>
+            <a style={{fontFamily: "sans-serif"}}>Pengaturan</a>
           </Link>
         </Menu.Item>
         <Menu.Item key="14" icon={<ImportOutlined />}>
-          Keluar
+          <Link href="/login">
+          <a onClick={handleLogout} style={{fontFamily: "sans-serif"}}>Keluar</a>
+          </Link>
         </Menu.Item>
       </Menu>
     </Sider>

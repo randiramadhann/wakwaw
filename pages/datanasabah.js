@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
+import Head from "next/head";
 
 import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
@@ -9,10 +10,15 @@ const { Content } = Layout;
 
 function datanasabah() {
   return (
+    <>
+    <Head>
+    <title>ZENIA ADMIN</title>
+    <link rel="icon" href="/logo.png" />
+  </Head>
     <Layout style={{ height: "100vh" }}>
-      <Sidebar />
+      <Navbar />
       <Layout>
-        <Navbar />
+        <Sidebar />
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className={styles.sitelayoutbackground}
@@ -23,6 +29,7 @@ function datanasabah() {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 }
 

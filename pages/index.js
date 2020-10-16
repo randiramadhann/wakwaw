@@ -1,19 +1,19 @@
 import React from "react";
 import Head from "next/head";
-
+import Dashboard from "./dashboard";
 import Login from "../pages/login";
+import {withAuth} from "../utils/withAuth"
 
-export default function Home() {
+function Home() {
   return (
-    <div className="homepage">
+    <>
       <Head>
-        <title>ZENIA</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>ZENIA ADMIN</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
 
-      <main className="maincontent">
-        <h1>Hi there!</h1>
-      </main>
-    </div>
+      <Dashboard />
+    </>
   );
 }
+export default withAuth(Home)

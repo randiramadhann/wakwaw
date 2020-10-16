@@ -1,29 +1,42 @@
-import React from "react";
-import { Layout } from "antd";
+import React,{useState} from "react";
+import { Layout} from "antd";
+import Head from "next/head";
+
 
 import styles from "../styles/Layout.module.css";
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
+import Schedule from "../components/sidebar/dashboard/schedule";
+import Card from "../components/sidebar/home/Card"
+import {withAuth} from "../utils/withAuth"
 
-const { Content } = Layout;
+
+const { Content,Footer } = Layout;
 
 function dashboard() {
+
   return (
+    <>
+    <Head>
+        <title>ZENIA ADMIN</title>
+        <link rel="icon" href="/logo.png" />
+      </Head>
+    
     <Layout style={{ height: "100vh" }}>
-      <Sidebar />
+      <Navbar />
       <Layout>
-        <Navbar />
+        <Sidebar />
         <Content style={{ margin: "24px 16px 0" }}>
-          <div
-            className={styles.sitelayoutbackground}
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            dashboard page
-          </div>
+            <Card/>
+            <Schedule  />
+             <div style={{width:"1096px"}}><Footer style={{ textAlign: 'center',background:"#fff",color:"#000", fontFamily: "sans-serif" }}>&#169; 2020 Zenia Indonesia Dashboard</Footer></div>
         </Content>
+        
       </Layout>
+      
     </Layout>
+    </>
   );
 }
 
-export default dashboard;
+export default withAuth(dashboard);
