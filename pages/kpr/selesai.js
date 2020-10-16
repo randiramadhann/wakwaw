@@ -83,7 +83,7 @@ const columns = [
     render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
-    title: "",
+    title: "Aksi",
     key: "action",
     render: (text, record) => (
       <Space size="middle">
@@ -170,7 +170,7 @@ function selesai({ items }) {
               fontWeight: "bold",
             }}
           >
-            KPR AKTIF
+            KPR SELESAI
           </div>
           <div
             className={styles.sitelayoutbackground}
@@ -196,7 +196,7 @@ function selesai({ items }) {
               }}
             >
               <Input
-                placeholder="Search"
+                placeholder="Cari"
                 value={value}
                 onChange={(e) => {
                   const currValue = e.target.value;
