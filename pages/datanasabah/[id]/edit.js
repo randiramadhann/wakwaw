@@ -17,6 +17,7 @@ function edit({ items }) {
 
   console.log(dataKpr);
 
+  //modalfunction
   const showModal = () => {
     setVisible(true);
   };
