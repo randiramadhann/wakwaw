@@ -28,6 +28,7 @@ class LoadMoreList extends React.Component {
             console.log(page);
           },
           pageSize: 5,
+          position:"bottom"
         }}
         
         dataSource={listData}

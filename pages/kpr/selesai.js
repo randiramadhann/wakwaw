@@ -70,17 +70,17 @@ const columns = [
   {
     title: "Target",
     dataIndex: ["data_kpr", "target"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
     dataIndex: ["data_kpr", "setoran"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
     dataIndex: ["data_kpr", "terkumpul"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Aksi",

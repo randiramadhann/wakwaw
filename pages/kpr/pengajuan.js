@@ -38,17 +38,17 @@ const columns = [
   {
     title: "Target",
     dataIndex: "savingTarget",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
     dataIndex: "installmentDeposit",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
     dataIndex: "totalDeposit",
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Aksi",
@@ -77,7 +77,6 @@ const columns = [
 ];
 
 function pengajuan({ items}) {
-  console.log("MBA AYU :", items)
   const [dataSource, setDataSource] = useState(items);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [value, setValue] = useState("");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Table, Tag, Button, Space, Input, Modal } from "antd";
 import Link from "next/link";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined,ExclamationCircleOutlined } from "@ant-design/icons";
 import fetch from "isomorphic-fetch";
 import Router from "next/router";
 import Head from "next/head";
@@ -12,6 +12,7 @@ import Sidebar from "../../components/layout/Sidebar";
 import Navbar from "../../components/layout/Navbar";
 
 const { Content } = Layout;
+const { confirm } = Modal;
 
 const columns = [
   {
@@ -35,17 +36,17 @@ const columns = [
   {
     title: "Target",
     dataIndex: ["data_kpr", "target"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
     dataIndex: ["data_kpr", "setoran"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
     dataIndex: ["data_kpr", "terkumpul"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Aksi",
@@ -86,6 +87,38 @@ function aktif({ items }) {
     },
   };
 
+
+  //handle delete confirmation
+  function showConfirm() {
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleOutlined />,
+      onOk: async () => {
+        const noteId = selectedRowKeys;
+        // DELETE request using fetch with async/await
+        const requestOptions = {
+          method: "DELETE",
+          headers: {
+            "cache-control": "no-cache",
+            "x-apikey": "c2ac98aa4eb69e875192b5714d7df88996e06",
+          },
+        };
+        try {
+          const deleted = await fetch(
+            `https://zenia-f7c7.restdb.io/rest/selesai/${noteId}`,
+            requestOptions
+          );
+          Router.reload();
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  }
+
   return (
     <>
     <Head>
@@ -110,6 +143,17 @@ function aktif({ items }) {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
+              <Button
+              type="primary"
+              shape="circle"
+              icon={<DeleteOutlined />}
+              size="middle"
+              onClick={showConfirm}
+              style={{
+                background: "#EB5757",
+                borderColor: "#EB5757",
+              }}
+            />
             <div
               style={{
                 marginBottom: "16px",

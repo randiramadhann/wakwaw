@@ -133,7 +133,7 @@ detail.getInitialProps = async ({ query: { id } }) => {
     },
   };
   const data = await fetch(
-    `https://zenia-f7c7.restdb.io/rest/pengajuan/${id}`,
+    `https://zenia-f7c7.restdb.io/rest/kprzenia/${id}`,
     requestOptions
   );
   const items = await data.json();

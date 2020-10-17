@@ -34,7 +34,7 @@ const columns = [
     render: (value)=>{
       let color = "geekblue";
       if(value==="selesai"){
-        color="##219653";
+        color="#219653";
       }
       if(value==="ditolak"){
         color="#BDBDBD"
@@ -45,42 +45,21 @@ const columns = [
           </Tag>
            );
     },
-    // // render: (tags) => (
-    // //   <>
-    // //     {tags.map((tag) => {
-    // //       let color = tag.length > 5 ? "geekblue" : "green";
-    // //       if (tag === "selesai") {
-    // //         color = "#219653";
-    // //       }
-    // //       if (tag === "ditolak") {
-    // //         color = "#BDBDBD";
-    // //       }
-    // //       if (tag === "berhenti") {
-    // //         color = "#EB5757";
-    // //       }
-    // //       return (
-    // //         <Tag color={color} key={tag} style={{ borderRadius: "20px" }}>
-    // //           {tag}
-    // //         </Tag>
-    // //       );
-    // //     })}
-    // //   </>
-    // ),
   },
   {
     title: "Target",
     dataIndex: ["data_kpr", "target"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Setoran",
     dataIndex: ["data_kpr", "setoran"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "Terkumpul",
     dataIndex: ["data_kpr", "terkumpul"],
-    render: (value) => `Rp ${value}.00`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    render: (value) => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
   {
     title: "",
@@ -170,7 +149,7 @@ function selesai({ items }) {
               fontWeight: "bold",
             }}
           >
-            KPR AKTIF
+            TABUNGAN SELESAI
           </div>
           <div
             className={styles.sitelayoutbackground}

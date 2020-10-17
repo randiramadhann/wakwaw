@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 import { Layout } from "antd";
 import Head from "next/head";
+import { List, Avatar } from 'antd';
+import cookies from 'nookies'
+import axios from 'axios'
 
 import Notifikasi from '../../components/sidebar/notifikasi/tabungan';
 import styles from "../../styles/Layout.module.css";
@@ -9,7 +12,8 @@ import Navbar from "../../components/layout/Navbar";
 
 const { Content } = Layout;
 
-function notifTabungan() {
+function notifTabungan({ items}) {
+  const [dataSource, setDataSource] = useState(items);
   return (
     <>
     <Head>
@@ -25,7 +29,27 @@ function notifTabungan() {
             className={styles.sitelayoutbackground}
             style={{ padding: 24, minHeight: 360 }}
           >
-            <Notifikasi/>
+            <List
+            pagination={{
+              onChange: page => {
+                console.log(page);
+              },
+              pageSize: 5,
+              position:"bottom"
+            }}
+            itemLayout="horizontal"
+            dataSource={dataSource}
+            renderItem={item => (
+            <List.Item>
+             <List.Item.Meta
+               avatar={<Avatar src="/wallet.png" />}
+                title={<a href="https://ant.design">{item.dashboardTitle}</a>}
+                description={item.dashboardDescription}
+            />
+        <div>{item.createdDate}</div>
+      </List.Item>
+    )}
+  />
           </div>
         </Content>
       </Layout>
@@ -33,5 +57,19 @@ function notifTabungan() {
     </>
   );
 }
+
+notifTabungan.getInitialProps = async context => {
+  //ambil token dari cookiesnya dulu
+  const { token } = cookies.get(context);
+  //await get pakai axios di return dalam bentuk items
+  const response = await axios.get('http://157.245.62.77:8080/api/dashboard/notification/tabungan', {
+    headers: {
+      "Authorization" : 'Bearer ' + token
+    }})
+    console.log("the response:", response)
+    return{
+      items: response.data.data
+    }
+};
 
 export default notifTabungan;
