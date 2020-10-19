@@ -71,7 +71,7 @@ class CardInfo extends React.Component {
                   >
                     + 250 Hari ini{" "}
                     <span style={{ position: "absolute", left: "200px" }}>
-                      <img src="/img/group.svg" alt="First slide" />
+                      <img src="/img/Group.svg" alt="First slide" />
                     </span>
                   </p>
                 </div>
