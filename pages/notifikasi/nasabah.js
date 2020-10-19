@@ -62,7 +62,7 @@ notifNasabah.getInitialProps = async context => {
   //ambil token dari cookiesnya dulu
   const { token } = cookies.get(context);
   //await get pakai axios di return dalam bentuk items
-  const response = await axios.get('http://157.245.62.77:8080/api/dashboard/notification/tabungan', {
+  const response = await axios.get('https://zenia.digital/api/dashboard/notification/tabungan', {
     headers: {
       "Authorization" : 'Bearer ' + token
     }})

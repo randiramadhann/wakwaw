@@ -19,7 +19,7 @@ function login() {
   const onFinish = async () => {
    console.log("mydata:", loginInfo)
    try {
-    const res = await axios.post(`http://157.245.62.77:8080/api/auth/signin`, {...loginInfo
+    const res = await axios.post(`https://zenia.digital/api/auth/signin`, {...loginInfo
     })
     cookies.set(null, 'token', res.data.data.accessToken,{path:'/'});
     message.success('Login berhasil!')
