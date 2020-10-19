@@ -109,7 +109,7 @@ class CardInfo extends React.Component {
                   >
                     + 73 Hari ini{" "}
                     <span style={{ position: "absolute", left: "200px" }}>
-                      <img src="/img/group.svg" alt="First slide" />
+                      <img src="/img/Group.svg" alt="First slide" />
                     </span>{" "}
                   </p>
                 </div>
@@ -147,7 +147,7 @@ class CardInfo extends React.Component {
                   >
                     + 16 Hari ini{" "}
                     <span style={{ position: "absolute", left: "200px" }}>
-                      <img src="/img/group.svg" alt="First slide" />
+                      <img src="/img/Group.svg" alt="First slide" />
                     </span>
                   </p>
                 </div>
@@ -186,7 +186,7 @@ class CardInfo extends React.Component {
                   >
                     + 57 Hari ini{" "}
                     <span style={{ position: "absolute", left: "200px" }}>
-                      <img src="/img/group.svg" alt="First slide" />
+                      <img src="/img/Group.svg" alt="First slide" />
                     </span>
                   </p>
                 </div>
